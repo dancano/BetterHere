@@ -1,15 +1,16 @@
-﻿using BetterHere.Common.Enum;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BetterHere.Web.Data.Entities
+namespace BetterHere.Web.Models
 {
-    public class UserEntity : IdentityUser
+    public class EditUserViewModel
     {
+        public int Id { get; set; }
+
         [Display(Name = "Document")]
         [MaxLength(20, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
@@ -28,24 +29,14 @@ namespace BetterHere.Web.Data.Entities
         [MaxLength(100, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string Address { get; set; }
 
+        [Display(Name = "Phone Number")]
+        [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Picture User")]
+        public IFormFile PictureFile { get; set; }
+
         [Display(Name = "Picture User")]
         public string PicturePathUser { get; set; }
-
-        //TODO: Fix URL when publish in Azure
-        [Display(Name = "Picture User")]
-        public string PictureFullPathUser => string.IsNullOrEmpty(PicturePathUser)
-        ? "https://JICtravelweb.azurewebsites.net//images/noimage.png"
-        : $"https://betterhere.blob.core.windows.net/users/{PicturePathUser}";
-
-        [Display(Name = "User Type")]
-        public UserType UserType { get; set; }
-
-        public string FullName => $"{FirstName} {LastName}";
-
-        public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
-
-        public ICollection<EstablishmentEntity> Establishments { get; set; }
-
-        public ICollection<FoodEntity> Foods { get; set; }
     }
 }

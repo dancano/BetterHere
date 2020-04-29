@@ -48,6 +48,8 @@ namespace BetterHere.Web
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddScoped<IUserHelper, UserHelper>();
+            services.AddScoped<IBlobHelper, BlobHelper>();
             services.AddTransient<SeedDb>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

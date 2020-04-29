@@ -15,6 +15,12 @@ namespace BetterHere.Web.Data.Entities
         [Display(Name = "Logo Establishment")]
         public string LogoEstablishmentPath { get; set; }
 
+        //TODO: Fix URL when publish in Azure
+        [Display(Name = "Logo Establishment")]
+        public string PictureFullPathUser => string.IsNullOrEmpty(LogoEstablishmentPath)
+        ? "https://JICtravelweb.azurewebsites.net//images/noimage.png"
+        : $"https://betterhere.blob.core.windows.net/establishments/{LogoEstablishmentPath}";
+
         public UserEntity User { get; set; }
 
         public TypeEstablishmentEntity TypeEstablishment { get; set; }

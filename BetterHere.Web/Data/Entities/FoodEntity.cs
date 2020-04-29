@@ -17,6 +17,12 @@ namespace BetterHere.Web.Data.Entities
         [Display(Name = "Picture Food")]
         public string PicturePathFood { get; set; }
 
+        //TODO: Fix URL when publish in Azure
+        [Display(Name = "Picture Food")]
+        public string PictureFullPathUser => string.IsNullOrEmpty(PicturePathFood)
+        ? "https://JICtravelweb.azurewebsites.net//images/noimage.png"
+        : $"https://betterhere.blob.core.windows.net/foods/{PicturePathFood}";
+
         public float Qualification { get; set; }
 
         public string Remarks { get; set; }
