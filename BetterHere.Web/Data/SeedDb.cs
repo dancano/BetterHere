@@ -13,13 +13,16 @@ namespace BetterHere.Web.Data
     {
         private readonly DataContext _dataContext;
         private readonly IUserHelper _userHelper;
+        private readonly IBlobHelper _blobHelper;
 
         public SeedDb(
             DataContext dataContext,
-            IUserHelper userHelper)
+            IUserHelper userHelper,
+            IBlobHelper blobHelper)
         {
             _dataContext = dataContext;
             _userHelper = userHelper;
+            _blobHelper = blobHelper;
         }
 
         public async Task SeedAsync()
@@ -75,7 +78,7 @@ namespace BetterHere.Web.Data
             string address,
             UserType userType)
         {
-            var user = await _userHelper.GetUserByEmailAsync(email);
+            var user = await _userHelper.GetUserAsync(email);
             if (user == null)
             {
                 user = new UserEntity
