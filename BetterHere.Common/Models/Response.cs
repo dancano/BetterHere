@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BetterHere.Common.Models
+﻿namespace BetterHere.Common.Models
 {
     public class Response
     {

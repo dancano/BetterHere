@@ -1,7 +1,7 @@
-﻿using Prism;
-using Prism.Ioc;
-using BetterHere.Prism.ViewModels;
+﻿using BetterHere.Prism.ViewModels;
 using BetterHere.Prism.Views;
+using Prism;
+using Prism.Ioc;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

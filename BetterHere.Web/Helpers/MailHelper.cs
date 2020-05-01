@@ -1,11 +1,8 @@
-﻿using MailKit.Net.Smtp;
-using BetterHere.Common.Models;
+﻿using BetterHere.Common.Models;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MimeKit;
+using System;
 
 namespace BetterHere.Web.Helpers
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BetterHere.Web.Data.Entities
+﻿namespace BetterHere.Web.Data.Entities
 {
     public class EstablishmentLocationEntity
     {
@@ -23,6 +18,6 @@ namespace BetterHere.Web.Data.Entities
 
         public EstablishmentEntity Establishments { get; set; }
 
-
+        public CityEntity Cities { get; set; }
     }
 }

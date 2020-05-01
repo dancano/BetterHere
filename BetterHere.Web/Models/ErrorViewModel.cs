@@ -1,5 +1,3 @@
-using System;
-
 namespace BetterHere.Web.Models
 {
     public class ErrorViewModel

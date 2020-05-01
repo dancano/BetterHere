@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BetterHere.Web.Data;
+using BetterHere.Web.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using BetterHere.Web.Data;
-using BetterHere.Web.Data.Entities;
 
 namespace BetterHere.Web.Controllers
 {
@@ -33,7 +30,7 @@ namespace BetterHere.Web.Controllers
                 return NotFound();
             }
 
-            var typeEstablishmentEntity = await _context.TypeEstablishments
+            TypeEstablishmentEntity typeEstablishmentEntity = await _context.TypeEstablishments
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (typeEstablishmentEntity == null)
             {
@@ -73,7 +70,7 @@ namespace BetterHere.Web.Controllers
                 return NotFound();
             }
 
-            var typeEstablishmentEntity = await _context.TypeEstablishments.FindAsync(id);
+            TypeEstablishmentEntity typeEstablishmentEntity = await _context.TypeEstablishments.FindAsync(id);
             if (typeEstablishmentEntity == null)
             {
                 return NotFound();
@@ -124,7 +121,7 @@ namespace BetterHere.Web.Controllers
                 return NotFound();
             }
 
-            var typeEstablishmentEntity = await _context.TypeEstablishments
+            TypeEstablishmentEntity typeEstablishmentEntity = await _context.TypeEstablishments
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (typeEstablishmentEntity == null)
             {
@@ -139,7 +136,7 @@ namespace BetterHere.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var typeEstablishmentEntity = await _context.TypeEstablishments.FindAsync(id);
+            TypeEstablishmentEntity typeEstablishmentEntity = await _context.TypeEstablishments.FindAsync(id);
             _context.TypeEstablishments.Remove(typeEstablishmentEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

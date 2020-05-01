@@ -2,7 +2,6 @@
 using BetterHere.Web.Data.Entities;
 using BetterHere.Web.Helpers;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,9 +31,9 @@ namespace BetterHere.Web.Data
             await CheckTypeFoodAsync();
             await CheckRolesAsync();
             await CheckUserAsync("1010", "Daniel", "Cano", "ddcp10@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
-            var owner = await CheckUserAsync("2020", "Dario", "Cano", "danieldario_01@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Owner);
-            var user1 = await CheckUserAsync("3030", "Daniel", "Peña", "probandos59@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
-            var user2 = await CheckUserAsync("4040", "Danidaniel", "Cape", "danielcano198367@correo.itm.edu.co", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            UserEntity owner = await CheckUserAsync("2020", "Dario", "Cano", "danieldario_01@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Owner);
+            UserEntity user1 = await CheckUserAsync("3030", "Daniel", "Peña", "probandos59@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            UserEntity user2 = await CheckUserAsync("4040", "Danidaniel", "Cape", "danielcano198367@correo.itm.edu.co", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
             await CheckEstablishmentAsync(owner, user1, user2);
         }
 
@@ -78,7 +77,7 @@ namespace BetterHere.Web.Data
             string address,
             UserType userType)
         {
-            var user = await _userHelper.GetUserAsync(email);
+            UserEntity user = await _userHelper.GetUserAsync(email);
             if (user == null)
             {
                 user = new UserEntity
@@ -95,14 +94,17 @@ namespace BetterHere.Web.Data
 
                 await _userHelper.AddUserAsync(user, "123456");
                 await _userHelper.AddUserToRoleAsync(user, userType.ToString());
+
+                var token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await _userHelper.ConfirmEmailAsync(user, token);
             }
 
             return user;
         }
 
         private async Task CheckEstablishmentAsync(
-            UserEntity owner, 
-            UserEntity user1, 
+            UserEntity owner,
+            UserEntity user1,
             UserEntity user2)
         {
             if (!_dataContext.Establishments.Any())

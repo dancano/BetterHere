@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BetterHere.Web.Data;
+using BetterHere.Web.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using BetterHere.Web.Data;
-using BetterHere.Web.Data.Entities;
 
 namespace BetterHere.Web.Controllers
 {
@@ -33,7 +30,7 @@ namespace BetterHere.Web.Controllers
                 return NotFound();
             }
 
-            var establishmentEntity = await _context.Establishments
+            EstablishmentEntity establishmentEntity = await _context.Establishments
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (establishmentEntity == null)
             {
@@ -73,7 +70,7 @@ namespace BetterHere.Web.Controllers
                 return NotFound();
             }
 
-            var establishmentEntity = await _context.Establishments.FindAsync(id);
+            EstablishmentEntity establishmentEntity = await _context.Establishments.FindAsync(id);
             if (establishmentEntity == null)
             {
                 return NotFound();
@@ -124,7 +121,7 @@ namespace BetterHere.Web.Controllers
                 return NotFound();
             }
 
-            var establishmentEntity = await _context.Establishments
+            EstablishmentEntity establishmentEntity = await _context.Establishments
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (establishmentEntity == null)
             {
@@ -139,7 +136,7 @@ namespace BetterHere.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var establishmentEntity = await _context.Establishments.FindAsync(id);
+            EstablishmentEntity establishmentEntity = await _context.Establishments.FindAsync(id);
             _context.Establishments.Remove(establishmentEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using BetterHere.Web.Data.Entities;
+﻿using BetterHere.Web.Data.Entities;
 using BetterHere.Web.Helpers;
 using BetterHere.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BetterHere.Web.Controllers
 {
@@ -112,14 +111,14 @@ namespace BetterHere.Web.Controllers
                     return View(model);
                 }
 
-                var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
-                var tokenLink = Url.Action("ConfirmEmail", "Account", new
+                string myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                string tokenLink = Url.Action("ConfirmEmail", "Account", new
                 {
                     userid = user.Id,
                     token = myToken
                 }, protocol: HttpContext.Request.Scheme);
 
-                var response = _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                Common.Models.Response response = _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
                     $"To allow the user, " +
                     $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
                 if (response.IsSuccess)
@@ -188,10 +187,10 @@ namespace BetterHere.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userHelper.GetUserAsync(User.Identity.Name);
+                UserEntity user = await _userHelper.GetUserAsync(User.Identity.Name);
                 if (user != null)
                 {
-                    var result = await _userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    Microsoft.AspNetCore.Identity.IdentityResult result = await _userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("ChangeUser");
@@ -215,22 +214,22 @@ namespace BetterHere.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userHelper.GetUserAsync(model.Username);
+                UserEntity user = await _userHelper.GetUserAsync(model.Username);
                 if (user != null)
                 {
-                    var result = await _userHelper.ValidatePasswordAsync(user, model.Password);
+                    Microsoft.AspNetCore.Identity.SignInResult result = await _userHelper.ValidatePasswordAsync(user, model.Password);
 
                     if (result.Succeeded)
                     {
-                        var claims = new[]
+                        Claim[] claims = new[]
                         {
                             new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                         };
 
-                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
-                        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                        var token = new JwtSecurityToken(
+                        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
+                        SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                        JwtSecurityToken token = new JwtSecurityToken(
                             _configuration["Tokens:Issuer"],
                             _configuration["Tokens:Audience"],
                             claims,
