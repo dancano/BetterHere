@@ -14,7 +14,7 @@ namespace BetterHere.Web.Data.Entities
 
         //TODO: Fix URL when publish in Azure
         [Display(Name = "Logo Establishment")]
-        public string PictureFullPathUser => string.IsNullOrEmpty(LogoEstablishmentPath)
+        public string PictureFullPathEstablishment => string.IsNullOrEmpty(LogoEstablishmentPath)
         ? "https://JICtravelweb.azurewebsites.net//images/noimage.png"
         : $"https://betterhere.blob.core.windows.net/establishments/{LogoEstablishmentPath}";
 
