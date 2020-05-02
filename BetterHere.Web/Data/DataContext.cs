@@ -19,6 +19,8 @@ namespace BetterHere.Web.Data
         public DbSet<TypeEstablishmentEntity> TypeEstablishments { get; set; }
 
         public DbSet<TypeFoodEntity> TypeFoods { get; set; }
+        
+        public DbSet<CityEntity> Cities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

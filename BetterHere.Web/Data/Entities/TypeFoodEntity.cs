@@ -11,6 +11,6 @@ namespace BetterHere.Web.Data.Entities
         [Display(Name = "Food Type")]
         public string FoodTypeName { get; set; }
 
-        public ICollection<FoodEntity> Foods { get; set; }
+        public List<FoodEntity> Foods { get; set; }
     }
 }
