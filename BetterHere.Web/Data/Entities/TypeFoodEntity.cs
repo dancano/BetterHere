@@ -9,7 +9,7 @@ namespace BetterHere.Web.Data.Entities
 
         [MinLength(3, ErrorMessage = "The {0} field must have {1} characters.")]
         [Display(Name = "Food Type")]
-        public string FoodType { get; set; }
+        public string FoodTypeName { get; set; }
 
         public ICollection<FoodEntity> Foods { get; set; }
     }

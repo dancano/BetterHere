@@ -12,7 +12,7 @@ namespace BetterHere.Common.Models
 
         [Required]
         [MinLength(3, ErrorMessage = "The {0} field must have {1} characters.")]
-        public string FoodType { get; set; }
+        public string FoodTypeName { get; set; }
 
     }
 }

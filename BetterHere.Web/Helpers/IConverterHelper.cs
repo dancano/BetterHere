@@ -7,5 +7,6 @@ namespace BetterHere.Web.Helpers
     {
         UserResponse ToUserResponse(UserEntity slaveEntity);
 
+        EstablishmentResponse ToEstablishmentResponse(EstablishmentEntity establishmentEntity);
     }
 }

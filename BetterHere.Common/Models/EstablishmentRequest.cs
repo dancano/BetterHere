@@ -10,6 +10,8 @@ namespace BetterHere.Common.Models
         [Required]
         public string Name { get; set; }
 
+        public int TypeEstablishmentId { get; set; }
+
         public byte[] PictureEstablishmentArray { get; set; }
     }
 }

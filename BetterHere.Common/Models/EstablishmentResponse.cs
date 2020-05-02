@@ -20,5 +20,7 @@ namespace BetterHere.Common.Models
         public List<EstablishmentLocationResponse> EstablishmentLocations { get; set; }
 
         public List<TypeFoodResponse> TypeFoods { get; set; }
+
+        public TypeEstablishmentResponse TypeEstablishments { get; set; }
     }
 }

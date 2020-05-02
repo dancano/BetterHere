@@ -41,9 +41,9 @@ namespace BetterHere.Web.Data
         {
             if (!_dataContext.TypeFoods.Any())
             {
-                _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodType = "Italiana" });
-                _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodType = "Mexicana" });
-                _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodType = "Peruana" });
+                _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodTypeName = "Italiana" });
+                _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodTypeName = "Mexicana" });
+                _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodTypeName = "Peruana" });
 
                 await _dataContext.SaveChangesAsync();
             }
@@ -118,7 +118,7 @@ namespace BetterHere.Web.Data
                     {
                         new TypeFoodEntity
                         {
-                            FoodType = _dataContext.TypeFoods.FirstOrDefaultAsync().ToString(),
+                            FoodTypeName = _dataContext.TypeFoods.FirstOrDefaultAsync().ToString(),
                             Foods = new List<FoodEntity>
                             {
                                 new FoodEntity
@@ -156,7 +156,7 @@ namespace BetterHere.Web.Data
                     {
                         new TypeFoodEntity
                         {
-                            FoodType = _dataContext.TypeFoods.FirstOrDefaultAsync().ToString(),
+                            FoodTypeName = _dataContext.TypeFoods.FirstOrDefaultAsync().ToString(),
                             Foods = new List<FoodEntity>
                             {
                                 new FoodEntity
