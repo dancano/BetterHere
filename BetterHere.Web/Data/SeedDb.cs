@@ -2,6 +2,7 @@
 using BetterHere.Web.Data.Entities;
 using BetterHere.Web.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +37,7 @@ namespace BetterHere.Web.Data
             UserEntity owner = await CheckUserAsync("2020", "Dario", "Cano", "danieldario_01@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Owner);
             UserEntity user1 = await CheckUserAsync("3030", "Daniel", "Peña", "probandos59@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
             UserEntity user2 = await CheckUserAsync("4040", "Danidaniel", "Cape", "danielcano198367@correo.itm.edu.co", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
-            TypeFoodEntity type1 = await _dataContext.TypeFoods.FirstOrDefaultAsync();
-            TypeEstablishmentEntity typeEstablishment1 = await _dataContext.TypeEstablishments.FirstOrDefaultAsync();
-            await CheckEstablishmentAsync(owner, user1, user2, type1, typeEstablishment1);
+            await CheckEstablishmentAsync(owner, user1, user2);
         }
 
         private async Task CheckCitiesAsync()
@@ -127,47 +126,45 @@ namespace BetterHere.Web.Data
         private async Task CheckEstablishmentAsync(
             UserEntity owner,
             UserEntity user1,
-            UserEntity user2,
-            TypeFoodEntity type1,
-            TypeEstablishmentEntity typeEstablishment1)
+            UserEntity user2)
         {
             if (!_dataContext.Establishments.Any())
             {
                 _dataContext.Establishments.Add(new EstablishmentEntity
                 {
-                    User = owner,
+                    User = user1,
                     Name = "D'Kache",
-                    TypeEstablishment = typeEstablishment1,
-                    TypeFoods = new List<TypeFoodEntity>
+                    EstablishmentLocations = new List<EstablishmentLocationEntity>
                     {
-                        new TypeFoodEntity
+                        new EstablishmentLocationEntity
                         {
-                            FoodTypeName = type1.FoodTypeName,
+                            Cities = await _dataContext.Cities.FirstOrDefaultAsync(c => c.Name == "Bello"),
+                            TypeEstablishment = await _dataContext.TypeEstablishments.FirstOrDefaultAsync(te => te.NameType == "Fast Food"),
                             Foods = new List<FoodEntity>
                             {
                                 new FoodEntity
-                                {   
-                                    FoodName = "Enchilados",
+                                {
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Italian"),
+                                    FoodName = "Albondigas bolognesas",
+                                    Remarks = "Muy ricas, acompañadas de papas a la francesa",
                                     Qualification = 4.5f,
-                                    Remarks = "Muy sabrosas, recomendadas",
-                                    User = user1,
-                                    TypeFoods = type1
+                                    User = user1
                                 },
                                 new FoodEntity
                                 {
-                                    FoodName = "Quesadillas",
-                                    Qualification = 2.5f,
-                                    Remarks = "Muy saladas, no las recomiendo",
-                                    User = user1,
-                                    TypeFoods = type1
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Arabic"),
+                                    FoodName = "Shawarma",
+                                    Remarks = "No agrado mucho, es demasiado condimentado, la presentación es buena",
+                                    Qualification = 1.5f,
+                                    User = user2
                                 },
                                 new FoodEntity
                                 {
-                                    FoodName = "Papitas Fritas",
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Hot"),
+                                    FoodName = "Taquitos",
+                                    Remarks = "Los más deliciosos que he probado, en realidad si son mexicanos y picantes",
                                     Qualification = 5.0f,
-                                    Remarks = "Las mejores de la ciudad, recomendisimas",
-                                    User = user2,
-                                    TypeFoods = type1
+                                    User = user2
                                 }
                             }
                         }
@@ -176,38 +173,39 @@ namespace BetterHere.Web.Data
 
                 _dataContext.Establishments.Add(new EstablishmentEntity
                 {
-                    User = user1,
-                    Name = "Mandingas",
-                    TypeFoods = new List<TypeFoodEntity>
+                    User = owner,
+                    Name = "Madingas",
+                    EstablishmentLocations = new List<EstablishmentLocationEntity>
                     {
-                        new TypeFoodEntity
+                        new EstablishmentLocationEntity
                         {
-                            FoodTypeName = type1.FoodTypeName,
+                            Cities = await _dataContext.Cities.FirstOrDefaultAsync(c => c.Name == "Medellín"),
+                            TypeEstablishment = await _dataContext.TypeEstablishments.FirstOrDefaultAsync(te => te.NameType == "Fast Food"),
                             Foods = new List<FoodEntity>
                             {
                                 new FoodEntity
                                 {
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Italian"),
                                     FoodName = "Longuipapas",
-                                    Qualification = 4.5f,
-                                    Remarks = "Muy sabrosas, recomendadas",
-                                    User = user2,
-                                    TypeFoods = type1
+                                    Remarks = "Es muy astiante la longaniza",
+                                    Qualification = 3.5f,
+                                    User = user1
                                 },
                                 new FoodEntity
                                 {
-                                    FoodName = "Mandipollo",
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Arabic"),
+                                    FoodName = "MandiCostillas",
+                                    Remarks = "Muy pocas costillas para su precio",
                                     Qualification = 2.5f,
-                                    Remarks = "Muy saladas, no las recomiendo",
-                                    User = user1,
-                                    TypeFoods = type1
+                                    User = user2,
                                 },
                                 new FoodEntity
                                 {
-                                    FoodName = "Mandingas Especial",
-                                    Qualification = 5.0f,
-                                    Remarks = "Las mejores de la ciudad, recomendisimas",
-                                    User = user2,
-                                    TypeFoods = type1
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Hot"),
+                                    FoodName = "Mandipollo",
+                                    Remarks = "Economicas, buena porcion, y bien preparado el pollo",
+                                    Qualification = 4.0f,
+                                    User = user2
                                 }
                             }
                         }

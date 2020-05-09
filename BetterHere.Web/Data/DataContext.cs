@@ -30,6 +30,9 @@ namespace BetterHere.Web.Data
                 .HasIndex(t => t.Name)
                 .IsUnique();
 
+            modelBuilder.Entity<FoodEntity>()
+                .HasIndex(t => new { t.FoodName, t.EstablishmentId })
+                .IsUnique();
         }
     }
 }

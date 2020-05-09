@@ -11,6 +11,6 @@ namespace BetterHere.Web.Data.Entities
         [Display(Name = "Establishment Type")]
         public string NameType { get; set; }
 
-        public List<EstablishmentEntity> Establishments { get; set; }
+        public List<EstablishmentLocationEntity> EstablishmentLocations { get; set; }
     }
 }

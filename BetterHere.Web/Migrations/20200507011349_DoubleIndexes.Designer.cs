@@ -4,14 +4,16 @@ using BetterHere.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BetterHere.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200507011349_DoubleIndexes")]
+    partial class DoubleIndexes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +44,8 @@ namespace BetterHere.Web.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("TypeEstablishmentId");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
@@ -49,6 +53,8 @@ namespace BetterHere.Web.Migrations
                     b.HasIndex("Name")
                         .IsUnique()
                         .HasFilter("[Name] IS NOT NULL");
+
+                    b.HasIndex("TypeEstablishmentId");
 
                     b.HasIndex("UserId");
 
@@ -77,15 +83,11 @@ namespace BetterHere.Web.Migrations
 
                     b.Property<double>("TargetLongitude");
 
-                    b.Property<int?>("TypeEstablishmentId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CitiesId");
 
                     b.HasIndex("EstablishmentsId");
-
-                    b.HasIndex("TypeEstablishmentId");
 
                     b.ToTable("EstablishmentLocations");
                 });
@@ -96,9 +98,9 @@ namespace BetterHere.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("EstablishmentId");
+                    b.Property<int?>("EstablishmentEntitiesId");
 
-                    b.Property<int?>("EstablishmentLocationsId");
+                    b.Property<string>("EstablishmentId");
 
                     b.Property<string>("FoodName");
 
@@ -114,7 +116,7 @@ namespace BetterHere.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstablishmentLocationsId");
+                    b.HasIndex("EstablishmentEntitiesId");
 
                     b.HasIndex("TypeFoodsId");
 
@@ -146,9 +148,13 @@ namespace BetterHere.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("EstablishmentEntityId");
+
                     b.Property<string>("FoodTypeName");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EstablishmentEntityId");
 
                     b.ToTable("TypeFoods");
                 });
@@ -335,6 +341,10 @@ namespace BetterHere.Web.Migrations
 
             modelBuilder.Entity("BetterHere.Web.Data.Entities.EstablishmentEntity", b =>
                 {
+                    b.HasOne("BetterHere.Web.Data.Entities.TypeEstablishmentEntity", "TypeEstablishment")
+                        .WithMany("Establishments")
+                        .HasForeignKey("TypeEstablishmentId");
+
                     b.HasOne("BetterHere.Web.Data.Entities.UserEntity", "User")
                         .WithMany("Establishments")
                         .HasForeignKey("UserId");
@@ -349,17 +359,13 @@ namespace BetterHere.Web.Migrations
                     b.HasOne("BetterHere.Web.Data.Entities.EstablishmentEntity", "Establishments")
                         .WithMany("EstablishmentLocations")
                         .HasForeignKey("EstablishmentsId");
-
-                    b.HasOne("BetterHere.Web.Data.Entities.TypeEstablishmentEntity", "TypeEstablishment")
-                        .WithMany("EstablishmentLocations")
-                        .HasForeignKey("TypeEstablishmentId");
                 });
 
             modelBuilder.Entity("BetterHere.Web.Data.Entities.FoodEntity", b =>
                 {
-                    b.HasOne("BetterHere.Web.Data.Entities.EstablishmentLocationEntity", "EstablishmentLocations")
-                        .WithMany("Foods")
-                        .HasForeignKey("EstablishmentLocationsId");
+                    b.HasOne("BetterHere.Web.Data.Entities.EstablishmentEntity", "EstablishmentEntities")
+                        .WithMany()
+                        .HasForeignKey("EstablishmentEntitiesId");
 
                     b.HasOne("BetterHere.Web.Data.Entities.TypeFoodEntity", "TypeFoods")
                         .WithMany("Foods")
@@ -368,6 +374,13 @@ namespace BetterHere.Web.Migrations
                     b.HasOne("BetterHere.Web.Data.Entities.UserEntity", "User")
                         .WithMany("Foods")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("BetterHere.Web.Data.Entities.TypeFoodEntity", b =>
+                {
+                    b.HasOne("BetterHere.Web.Data.Entities.EstablishmentEntity")
+                        .WithMany("TypeFoods")
+                        .HasForeignKey("EstablishmentEntityId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

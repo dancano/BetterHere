@@ -1,4 +1,7 @@
-﻿namespace BetterHere.Web.Data.Entities
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace BetterHere.Web.Data.Entities
 {
     public class EstablishmentLocationEntity
     {
@@ -18,6 +21,12 @@
 
         public EstablishmentEntity Establishments { get; set; }
 
+        public TypeEstablishmentEntity TypeEstablishment { get; set; }
+
         public CityEntity Cities { get; set; }
+
+        public List<FoodEntity> Foods { get; set; }
+
+        public float AverageQualification => Foods == null ? 0 : Foods.Average(f => f.Qualification);
     }
 }

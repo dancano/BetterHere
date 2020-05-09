@@ -23,6 +23,10 @@ namespace BetterHere.Web.Data.Entities
 
         public string Remarks { get; set; }
 
+        public string EstablishmentId { get; set; }
+
+        public EstablishmentLocationEntity EstablishmentLocations { get; set; }
+
         public TypeFoodEntity TypeFoods { get; set; }
 
         public UserEntity User { get; set; }

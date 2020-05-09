@@ -51,8 +51,6 @@ namespace BetterHere.Web.Controllers.API
 
             EstablishmentEntity establishmentEntity = await _context.Establishments
                 .Include(e => e.EstablishmentLocations)
-                .Include(e => e.TypeFoods)
-                .ThenInclude(e => e.Foods)
                 .FirstOrDefaultAsync(e => e.Name == name);
 
             if (establishmentEntity == null)

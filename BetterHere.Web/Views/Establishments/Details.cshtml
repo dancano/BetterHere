@@ -6,24 +6,53 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>EstablishmentEntity</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LogoEstablishmentPath)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LogoEstablishmentPath)
-        </dd>
-    </dl>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().Cities)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().SourceLatitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().SourceLongitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().Remarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().Qualification)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EstablishmentLocations)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cities.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceLatitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceLongitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageQualification)
+            </td>
+            <td>
+                <a asp-action="FoodsDetails" asp-route-id="@item.Id" class="btn btn-info">Foods Detail</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

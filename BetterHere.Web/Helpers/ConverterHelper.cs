@@ -37,21 +37,6 @@ namespace BetterHere.Web.Helpers
                         TargetLongitude = el.TargetLongitude,
                         Qualification = el.Qualification,
                         Remarks = el.Remarks
-                    }).ToList(),
-                TypeFoods = establishmentEntity.TypeFoods?.Select(
-                    tf => new TypeFoodResponse
-                    {
-                        Id = tf.Id,
-                        FoodTypeName = tf.FoodTypeName,
-                        Foods = tf.Foods?.Select(
-                            f => new FoodResponse
-                            {
-                                Id = f.Id,
-                                FoodName = f.FoodName,
-                                PicturePathFood = f.PicturePathFood,
-                                Qualification = f.Qualification,
-                                Remarks = f.Remarks
-                            }).ToList()
                     }).ToList()
             };
         }

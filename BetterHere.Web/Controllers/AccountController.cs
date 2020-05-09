@@ -100,7 +100,7 @@ namespace BetterHere.Web.Controllers
 
                 if (model.PictureFile != null)
                 {
-                    path = await _blobHelper.UploadBlobAsync(model.PictureFile, "Users");
+                    path = await _blobHelper.UploadBlobAsync(model.PictureFile, "users");
                 }
 
                 UserEntity user = await _userHelper.AddUserAsync(model, path);
@@ -160,7 +160,7 @@ namespace BetterHere.Web.Controllers
 
                 if (model.PictureFile != null)
                 {
-                    path = await _blobHelper.UploadBlobAsync(model.PictureFile, "Users");
+                    path = await _blobHelper.UploadBlobAsync(model.PictureFile, "users");
                 }
 
                 UserEntity user = await _userHelper.GetUserAsync(User.Identity.Name);
