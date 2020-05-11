@@ -8,9 +8,6 @@ namespace BetterHere.Common.Models
     public class TypeFoodRequest
     {
         [Required]
-        public int IdEstablishment { get; set; }
-
-        [Required]
         [MinLength(3, ErrorMessage = "The {0} field must have {1} characters.")]
         public string FoodTypeName { get; set; }
 

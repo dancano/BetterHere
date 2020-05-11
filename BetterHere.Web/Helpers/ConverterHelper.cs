@@ -1,5 +1,7 @@
 ﻿using BetterHere.Common.Models;
 using BetterHere.Web.Data.Entities;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BetterHere.Web.Helpers
@@ -35,10 +37,116 @@ namespace BetterHere.Web.Helpers
                         SourceLongitude = el.SourceLongitude,
                         TargetLatitude = el.TargetLatitude,
                         TargetLongitude = el.TargetLongitude,
-                        Qualification = el.Qualification,
                         Remarks = el.Remarks
                     }).ToList()
             };
+        }
+
+        public EstablishmentLocationResponse ToEstablishmentLocationResponse(EstablishmentLocationEntity establishmentLocationEntity)
+        {
+            return new EstablishmentLocationResponse
+            {
+                Id = establishmentLocationEntity.Id,
+                Remarks = establishmentLocationEntity.Remarks,
+                SourceLatitude = establishmentLocationEntity.SourceLatitude,
+                TargetLatitude = establishmentLocationEntity.TargetLatitude,
+                SourceLongitude = establishmentLocationEntity.SourceLatitude,
+                TargetLongitude = establishmentLocationEntity.TargetLongitude,
+                Establishments = ToEstablishmentResponse(establishmentLocationEntity.Establishments),
+                Cities = ToCityResponse(establishmentLocationEntity.Cities),
+                TypeEstablishment = ToTypeEstablishmentResponse(establishmentLocationEntity.TypeEstablishment),
+                Foods = establishmentLocationEntity.Foods?.Select(f => new FoodResponse
+                {
+                    Id = f.Id,
+                    FoodName = f.FoodName,
+                    PicturePathFood = f.PicturePathFood,
+                    Qualification = f.Qualification,
+                    Remarks = f.Remarks,
+                    User = ToUserResponse(f.User),
+                    TypeFoods = ToTypeFoodResponse(f.TypeFoods)
+                }).ToList()
+            };
+        }
+
+        public List<EstablishmentLocationResponse> ToEstablishmentLocationResponse(List<EstablishmentLocationEntity> establishmentLocationEntity)
+        {
+            return establishmentLocationEntity.Select( el => new EstablishmentLocationResponse
+            {
+                Id = el.Id,
+                Remarks = el.Remarks,
+                SourceLatitude = el.SourceLatitude,
+                TargetLatitude = el.TargetLatitude,
+                SourceLongitude = el.SourceLatitude,
+                TargetLongitude = el.TargetLongitude,
+                Cities = ToCityResponse(el.Cities),
+                TypeEstablishment = ToTypeEstablishmentResponse(el.TypeEstablishment),
+                Foods = el.Foods?.Select(f => new FoodResponse
+                {
+                    Id = f.Id,
+                    FoodName = f.FoodName,
+                    PicturePathFood = f.PicturePathFood,
+                    Qualification = f.Qualification,
+                    Remarks = f.Remarks,
+                    User = ToUserResponse(f.User),
+                    TypeFoods = ToTypeFoodResponse(f.TypeFoods)
+                }).ToList()
+            }).ToList();
+        }
+
+        public CityResponse ToCityResponse(CityEntity cityEntity)
+        {
+            return new CityResponse
+            {
+                Id = cityEntity.Id,
+                Name = cityEntity.Name
+            };
+        }
+
+        public TypeEstablishmentResponse ToTypeEstablishmentResponse(TypeEstablishmentEntity typeEstablishmentEntity)
+        {
+            return new TypeEstablishmentResponse
+            {
+                Id = typeEstablishmentEntity.Id,
+                NameType = typeEstablishmentEntity.NameType
+            };
+        }
+
+        public TypeFoodResponse ToTypeFoodResponse(TypeFoodEntity typeFoodEntity)
+        {
+            return new TypeFoodResponse
+            {
+                Id = typeFoodEntity.Id,
+                FoodTypeName = typeFoodEntity.FoodTypeName
+            };
+        }
+
+        public FoodResponse ToFoodResponse(FoodEntity foodEntity)
+        {
+            return new FoodResponse
+            {
+                Id = foodEntity.Id,
+                FoodName = foodEntity.FoodName,
+                PicturePathFood = foodEntity.PicturePathFood,
+                Qualification = foodEntity.Qualification,
+                Remarks = foodEntity.Remarks,
+                EstablishmentLocationId = foodEntity.EstablishmentLocationId,
+                TypeFoods = ToTypeFoodResponse(foodEntity.TypeFoods),
+                User = ToUserResponse(foodEntity.User)
+            };
+        }
+
+        public List<FoodResponse> ToFoodResponse(List<FoodEntity> foodEntity)
+        {
+            return foodEntity.Select(f => new FoodResponse
+            {
+                Id = f.Id,
+                FoodName = f.FoodName,
+                PicturePathFood = f.PicturePathFood,
+                Qualification = f.Qualification,
+                Remarks = f.Remarks,
+                TypeFoods = ToTypeFoodResponse(f.TypeFoods),
+                User = ToUserResponse(f.User)
+            }).ToList();
         }
     }
 }

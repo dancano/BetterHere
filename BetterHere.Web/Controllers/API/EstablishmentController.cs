@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Ocsp;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BetterHere.Web.Controllers.API
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class EstablishmentController : ControllerBase
@@ -59,6 +60,54 @@ namespace BetterHere.Web.Controllers.API
             }
 
             return Ok(_converterHelper.ToEstablishmentResponse(establishmentEntity));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostEstablishment([FromBody] EstablishmentRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Response
+                {
+                    IsSuccess = false,
+                    Message = "Bad request",
+                    Result = ModelState
+                });
+            }
+            
+            UserEntity userEntity = await _userHelper.GetUserAsync(request.UserId);
+            if (userEntity == null)
+            {
+                return BadRequest("User doesn't exists.");
+            }
+
+            EstablishmentEntity establishment = await _context.Establishments.FirstOrDefaultAsync(e => e.Name == request.Name);
+            if (establishment != null)
+            {
+                return BadRequest(new Response
+                {
+                    IsSuccess = false,
+                    Message = "Establishment exist"
+                });
+            }
+
+            string picturePath = string.Empty;
+            if (request.PictureEstablishmentArray != null && request.PictureEstablishmentArray.Length > 0)
+            {
+                picturePath = await _blobHelper.UploadBlobAsync(request.PictureEstablishmentArray, "establishments");
+            }
+
+            establishment = new EstablishmentEntity
+            {
+                Name = request.Name,
+                LogoEstablishmentPath = picturePath,
+                User = userEntity
+            };
+
+            _context.Establishments.Add(establishment);
+            await _context.SaveChangesAsync();
+
+            return Ok(_converterHelper.ToEstablishmentResponse(establishment));
         }
     }
 }

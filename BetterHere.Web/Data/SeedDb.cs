@@ -138,6 +138,8 @@ namespace BetterHere.Web.Data
                     {
                         new EstablishmentLocationEntity
                         {
+                            SourceLatitude = 73,
+                            SourceLongitude = 11,
                             Cities = await _dataContext.Cities.FirstOrDefaultAsync(c => c.Name == "Bello"),
                             TypeEstablishment = await _dataContext.TypeEstablishments.FirstOrDefaultAsync(te => te.NameType == "Fast Food"),
                             Foods = new List<FoodEntity>
@@ -147,7 +149,7 @@ namespace BetterHere.Web.Data
                                     TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Italian"),
                                     FoodName = "Albondigas bolognesas",
                                     Remarks = "Muy ricas, acompañadas de papas a la francesa",
-                                    Qualification = 4.5f,
+                                    Qualification = 4.1f,
                                     User = user1
                                 },
                                 new FoodEntity
@@ -155,13 +157,47 @@ namespace BetterHere.Web.Data
                                     TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Arabic"),
                                     FoodName = "Shawarma",
                                     Remarks = "No agrado mucho, es demasiado condimentado, la presentación es buena",
-                                    Qualification = 1.5f,
+                                    Qualification = 1.3f,
                                     User = user2
                                 },
                                 new FoodEntity
                                 {
                                     TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Hot"),
                                     FoodName = "Taquitos",
+                                    Remarks = "Los más deliciosos que he probado, en realidad si son mexicanos y picantes",
+                                    Qualification = 5.0f,
+                                    User = user2
+                                }
+                            }
+                        },
+                        new EstablishmentLocationEntity
+                        {
+                            SourceLatitude = 74,
+                            SourceLongitude = 12,
+                            Cities = await _dataContext.Cities.FirstOrDefaultAsync(c => c.Name == "Pereira"),
+                            TypeEstablishment = await _dataContext.TypeEstablishments.FirstOrDefaultAsync(te => te.NameType == "Fast Food"),
+                            Foods = new List<FoodEntity>
+                            {
+                                new FoodEntity
+                                {
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Italian"),
+                                    FoodName = "Albondinesas",
+                                    Remarks = "Muy ricas, acompañadas de papas a la francesa",
+                                    Qualification = 5.0f,
+                                    User = user1
+                                },
+                                new FoodEntity
+                                {
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Arabic"),
+                                    FoodName = "PimePica",
+                                    Remarks = "No agrado mucho, es demasiado condimentado, la presentación es buena",
+                                    Qualification = 1.5f,
+                                    User = user2
+                                },
+                                new FoodEntity
+                                {
+                                    TypeFoods = await _dataContext.TypeFoods.FirstOrDefaultAsync(tf => tf.FoodTypeName == "Hot"),
+                                    FoodName = "Picada Mexicana",
                                     Remarks = "Los más deliciosos que he probado, en realidad si son mexicanos y picantes",
                                     Qualification = 5.0f,
                                     User = user2
@@ -179,6 +215,8 @@ namespace BetterHere.Web.Data
                     {
                         new EstablishmentLocationEntity
                         {
+                            SourceLatitude = 71,
+                            SourceLongitude = 13,
                             Cities = await _dataContext.Cities.FirstOrDefaultAsync(c => c.Name == "Medellín"),
                             TypeEstablishment = await _dataContext.TypeEstablishments.FirstOrDefaultAsync(te => te.NameType == "Fast Food"),
                             Foods = new List<FoodEntity>

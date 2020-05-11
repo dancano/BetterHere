@@ -1,4 +1,5 @@
 ﻿using BetterHere.Common.Enum;
+using System.Collections.Generic;
 
 namespace BetterHere.Common.Models
 {
@@ -29,5 +30,8 @@ namespace BetterHere.Common.Models
 
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
 
+        public List<EstablishmentResponse> Establishments { get; set; }
+
+        public List<FoodResponse> Foods { get; set; }
     }
 }

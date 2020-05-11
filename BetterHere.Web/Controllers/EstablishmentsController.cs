@@ -53,6 +53,8 @@ namespace BetterHere.Web.Controllers
                 .ThenInclude(m => m.Cities)
                 .Include(m => m.EstablishmentLocations)
                 .ThenInclude(m => m.Foods)
+                .Include(m => m.EstablishmentLocations)
+                .ThenInclude(m => m.TypeEstablishment)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (establishmentEntity == null)

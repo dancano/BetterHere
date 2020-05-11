@@ -10,5 +10,6 @@ namespace BetterHere.Common.Models
 
         public string NameType { get; set; }
 
+        public List<EstablishmentLocationResponse> EstablishmentLocations { get; set; }
     }
 }

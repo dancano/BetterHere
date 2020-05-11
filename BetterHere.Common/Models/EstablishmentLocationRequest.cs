@@ -10,6 +10,10 @@ namespace BetterHere.Common.Models
         [Required]
         public int IdEstablishment { get; set; }
 
+        public int IdCity { get; set; }
+
+        public int IdTypeEstablishment { get; set; }
+
         public double SourceLatitude { get; set; }
 
         public double SourceLongitude { get; set; }
@@ -18,10 +22,6 @@ namespace BetterHere.Common.Models
 
         public double TargetLongitude { get; set; }
 
-        [Required]
-        public float Qualification { get; set; }
-
-        [Required]
         public string Remarks { get; set; }
 
     }

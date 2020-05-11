@@ -15,8 +15,6 @@ namespace BetterHere.Web.Data.Entities
 
         public double TargetLongitude { get; set; }
 
-        public float Qualification { get; set; }
-
         public string Remarks { get; set; }
 
         public EstablishmentEntity Establishments { get; set; }
@@ -27,6 +25,6 @@ namespace BetterHere.Web.Data.Entities
 
         public List<FoodEntity> Foods { get; set; }
 
-        public float AverageQualification => Foods == null ? 0 : Foods.Average(f => f.Qualification);
+        public float? AverageQualification => Foods == null ? 0 : Foods.Average(f => f.Qualification);
     }
 }

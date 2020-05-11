@@ -17,10 +17,8 @@ namespace BetterHere.Common.Models
         ? "https://JICtravelweb.azurewebsites.net//images/noimage.png"
         : $"https://betterhere.blob.core.windows.net/establishments/{LogoEstablishmentPath}";
 
+        public UserResponse User { get; set; }
+
         public List<EstablishmentLocationResponse> EstablishmentLocations { get; set; }
-
-        public List<TypeFoodResponse> TypeFoods { get; set; }
-
-        public TypeEstablishmentResponse TypeEstablishments { get; set; }
     }
 }

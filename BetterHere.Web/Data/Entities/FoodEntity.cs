@@ -23,7 +23,7 @@ namespace BetterHere.Web.Data.Entities
 
         public string Remarks { get; set; }
 
-        public string EstablishmentId { get; set; }
+        public string EstablishmentLocationId { get; set; }
 
         public EstablishmentLocationEntity EstablishmentLocations { get; set; }
 
