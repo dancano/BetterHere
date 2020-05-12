@@ -6,6 +6,8 @@ using BetterHere.Common.Models;
 using BetterHere.Web.Data;
 using BetterHere.Web.Data.Entities;
 using BetterHere.Web.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -59,6 +61,7 @@ namespace BetterHere.Web.Controllers.API
 
         [HttpPost]
         [Route("PostFood")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PostFood([FromBody] FoodRequest request)
         {
             if (!ModelState.IsValid)

@@ -8,6 +8,8 @@ namespace BetterHere.Common.Helpers
         private const string _user = "user";
         private const string _token = "token";
         private const string _isLogin = "isLogin";
+        private const string _establishment = "establishment";
+        private const string _establishmentLocation = "establishmentLocation";
         private static readonly string _stringDefault = string.Empty;
         private static readonly bool _boolDefault = false;
 
@@ -29,6 +31,18 @@ namespace BetterHere.Common.Helpers
         {
             get => AppSettings.GetValueOrDefault(_isLogin, _boolDefault);
             set => AppSettings.AddOrUpdateValue(_isLogin, value);
+        }
+
+        public static bool Establishment
+        {
+            get => AppSettings.GetValueOrDefault(_establishment, _boolDefault);
+            set => AppSettings.AddOrUpdateValue(_establishment, value);
+        }
+
+        public static bool EstablishmentLocation
+        {
+            get => AppSettings.GetValueOrDefault(_establishmentLocation, _boolDefault);
+            set => AppSettings.AddOrUpdateValue(_establishmentLocation, value);
         }
     }
 }

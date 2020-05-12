@@ -63,6 +63,7 @@ namespace BetterHere.Web.Controllers.API
         }
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PostEstablishment([FromBody] EstablishmentRequest request)
         {
             if (!ModelState.IsValid)

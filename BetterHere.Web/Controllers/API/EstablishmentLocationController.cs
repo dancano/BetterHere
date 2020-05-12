@@ -62,6 +62,7 @@ namespace BetterHere.Web.Controllers.API
 
         [HttpPost]
         [Route("PostEstablishmentLocation")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PostEstablishmentLocation([FromBody] EstablishmentLocationRequest request)
         {
             if (!ModelState.IsValid)
