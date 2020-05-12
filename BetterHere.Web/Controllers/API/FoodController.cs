@@ -93,7 +93,7 @@ namespace BetterHere.Web.Controllers.API
                     return BadRequest(new Response
                     {
                         IsSuccess = false,
-                        Message = "The exist in this place"
+                        Message = "This food exist in this place"
                     });
                 }
             }
