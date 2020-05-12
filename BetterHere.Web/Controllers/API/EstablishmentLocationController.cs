@@ -20,11 +20,9 @@ namespace BetterHere.Web.Controllers.API
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
         private readonly IConverterHelper _converterHelper;
-        private readonly IBlobHelper _blobHelper;
 
         public EstablishmentLocationController(
             DataContext context,
-            IBlobHelper blobHelper,
             IUserHelper userHelper,
             IConverterHelper converterHelper
             )
@@ -32,7 +30,6 @@ namespace BetterHere.Web.Controllers.API
             _context = context;
             _userHelper = userHelper;
             _converterHelper = converterHelper;
-            _blobHelper = blobHelper;
         }
 
         [HttpPost]
@@ -121,29 +118,5 @@ namespace BetterHere.Web.Controllers.API
             return Ok(_converterHelper.ToEstablishmentLocationResponse(establishmentLocation));
 
         }
-
-        [HttpPost]
-        [Route("GetFoods")]
-        public async Task<IActionResult> GetFoods([FromBody] FoodRequest foodRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            List<FoodEntity> foodEntity = await _context.Foods
-                .Include(m => m.TypeFoods)
-                .Include(m => m.User)
-                .Where(e => e.EstablishmentLocations.Id == foodRequest.EstablishmentLocationId)
-                .ToListAsync();
-
-            if (foodEntity == null)
-            {
-
-            }
-
-            return Ok(_converterHelper.ToFoodResponse(foodEntity));
-        }
-
     }
 }
