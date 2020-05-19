@@ -1,7 +1,10 @@
-﻿using BetterHere.Prism.ViewModels;
+﻿using BetterHere.Common.Helpers;
+using BetterHere.Common.Services;
+using BetterHere.Prism.ViewModels;
 using BetterHere.Prism.Views;
 using Prism;
 using Prism.Ioc;
+using Syncfusion.Licensing;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,15 +24,25 @@ namespace BetterHere.Prism
 
         protected override async void OnInitialized()
         {
+            SyncfusionLicenseProvider.RegisterLicense("MjM3OTczQDMxMzgyZTMxMmUzMGsxcUcrU0cyYTdXZDVqY3dUckdPQWRoWHdrUi8wak1mRHQvSUpQMU43N0k9");
             InitializeComponent();
-
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("BetterHereMasterDetailPage/NavigationPage/HomePage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IApiService, ApiService>();
+            containerRegistry.Register<IRegexHelper, RegexHelper>();
+            containerRegistry.Register<IFilesHelper, FilesHelper>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
+            containerRegistry.RegisterForNavigation<BetterHereMasterDetailPage, BetterHereMasterDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
+            containerRegistry.RegisterForNavigation<ReportPage, ReportPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
+            containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
         }
     }
 }

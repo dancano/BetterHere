@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/0cf779c0-0fdc-4321-82d4-9b5bad745f1b/resourcegroups/ITM/providers/Microsoft.Sql/servers/danicapndbserver/databases/BetterHere.Web_db",
+      "type": "mssql.azure",
+      "connectionId": "DefaultConnection"
+    }
+  }
+}

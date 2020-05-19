@@ -2,9 +2,9 @@
 
 namespace BetterHere.Prism.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class RememberPasswordPage : ContentPage
     {
-        public MainPage()
+        public RememberPasswordPage()
         {
             InitializeComponent();
         }

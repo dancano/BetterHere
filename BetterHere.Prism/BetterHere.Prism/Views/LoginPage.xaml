@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="BetterHere.Prism.Views.LoginPage"
+             BackgroundColor="{StaticResource ColorSecondary}"
+             Title="{Binding Title}">
+    
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Grid>
+                <Image Source="SplashBetterHere.png" Aspect="AspectFill"/>
+                <BoxView Color="LemonChiffon" Opacity="0.8"/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Row="1" Padding="30,20">
+                        <Entry Placeholder="Email" 
+                               PlaceholderColor="Azure"
+                               BackgroundColor="Transparent"
+                               Text="{Binding Email}"/>
+                        <Entry Placeholder="Password" 
+                               PlaceholderColor="Azure"
+                               BackgroundColor="Transparent"
+                               Text="{Binding Password}"
+                               IsPassword="True"/>
+                        <Button
+                                     Command="{Binding LoginCommand}"
+                                     IsEnabled="{Binding IsEnabled}"
+                                     HeightRequest="50"
+                                     WidthRequest="200"
+                                     VerticalOptions="CenterAndExpand"
+                                     HorizontalOptions="CenterAndExpand"
+                                     CornerRadius="25"
+                                     BorderWidth="1"
+                                     BorderColor="Gray"
+                                     BackgroundColor="{StaticResource ColorPrimary}"
+                                     ImageSource="ic_fastfood.png"
+                                     FontSize="18"
+                                     Text="LogIn"/>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Forgot Password?"
+                                    TextColor="#118C76"
+                                    FontAttributes="Bold"
+                                    IsEnabled="True">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RecoverPasswordCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Text="SingUp"
+                                    FontAttributes="Bold"
+                                    TextColor="#118C76"
+                                    HorizontalOptions="EndAndExpand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" HorizontalOptions="Center" Margin="0,0,0,50">
+                            <Label Text="LogIn With" HorizontalOptions="Center"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Grid.Row="0" Source="Face_Logo.png" WidthRequest="55" HeightRequest="55"/>
+                                <Image Grid.Row="0" Source="Insta_Logo.png" WidthRequest="50" HeightRequest="50"/>
+                                <Image Grid.Row="0" Source="In_Logo.png" WidthRequest="40" HeightRequest="40"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+
+                </Grid>
+            </Grid>
+        </AbsoluteLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
