@@ -10,6 +10,8 @@ namespace BetterHere.Web.Helpers
 
         EstablishmentResponse ToEstablishmentResponse(EstablishmentEntity establishmentEntity);
 
+        List<EstablishmentResponse> ToEstablishmentResponse(List<EstablishmentEntity> establishmentEntity);
+
         EstablishmentLocationResponse ToEstablishmentLocationResponse(EstablishmentLocationEntity establishmentLocationEntity);
 
         List<EstablishmentLocationResponse> ToEstablishmentLocationResponse(List<EstablishmentLocationEntity> establishmentLocationEntity);

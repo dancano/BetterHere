@@ -10,6 +10,7 @@ namespace BetterHere.Prism.ViewModels
         private bool _isRunning;
         private readonly IApiService _apiService;
         private readonly INavigationService _navigationService;
+        private EstablishmentResponse _establishment;
 
         public HomePageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
         {
@@ -25,6 +26,12 @@ namespace BetterHere.Prism.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
+        public EstablishmentResponse Establishment
+        {
+            get => _establishment;
+            set => SetProperty(ref _establishment, value);
+        }
+
         private async void LoadEstablishment()
         {
             IsRunning = true;
@@ -38,24 +45,9 @@ namespace BetterHere.Prism.ViewModels
             }
 
 
-            Response response = await _apiService.GetEstablishmentAsync(url, "api", "/Establishment");
+            Response response = await _apiService.GetEstablishmentAsync(url, "api", "/establishment");
 
-
-            /*var Slave = JsonConvert.DeserializeObject<SlaveResponse>(Settings.User);
-            Response response = await _apiService.GetTripAsync(Slave.Document, url, "api", "/Slaves");
-            IsRunning = false;
-
-
-            Slave = (SlaveResponse)response.Result;
-            Trips = Slave.Trips.Where(t => t.CityVisited != null).Select(t => new TripDetailsItemViewModel(_navigationService)
-            {
-                Id = t.Id,
-                StartDate = t.StartDate,
-                EndDate = t.EndDate,
-                CityVisited = t.CityVisited,
-                tripDetails = t.tripDetails,
-                User = t.User
-            }).OrderByDescending(t => t.StartDate).ToList();*/
+            Establishment = (EstablishmentResponse)response.Result;
 
         }
     }

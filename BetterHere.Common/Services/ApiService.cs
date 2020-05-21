@@ -233,22 +233,23 @@ namespace BetterHere.Common.Services
 
                 string url = $"{servicePrefix}{controller}";
                 HttpResponseMessage response = await client.GetAsync(url);
-                string result = await response.Content.ReadAsStringAsync();
+                string answer = await response.Content.ReadAsStringAsync();
 
                 if (!response.IsSuccessStatusCode)
                 {
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = result,
+                        Message = answer,
                     };
                 }
+                
+                EstablishmentResponse establishment = JsonConvert.DeserializeObject<EstablishmentResponse>(answer);
 
-                EstablishmentResponse model = JsonConvert.DeserializeObject<EstablishmentResponse>(result);
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = model
+                    Result = answer,
                 };
             }
             catch (Exception ex)
@@ -256,7 +257,7 @@ namespace BetterHere.Common.Services
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = ex.Message
+                    Message = ex.Message,
                 };
             }
         }

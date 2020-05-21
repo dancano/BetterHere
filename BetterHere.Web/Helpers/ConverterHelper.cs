@@ -42,6 +42,26 @@ namespace BetterHere.Web.Helpers
             };
         }
 
+        public List<EstablishmentResponse> ToEstablishmentResponse(List<EstablishmentEntity> establishmentEntity)
+        {
+            return establishmentEntity.Select( e => new EstablishmentResponse
+            {
+                Id = e.Id,
+                Name = e.Name,
+                LogoEstablishmentPath = e.LogoEstablishmentPath,
+                EstablishmentLocations = e.EstablishmentLocations?.Select(
+                    el => new EstablishmentLocationResponse
+                    {
+                        Id = el.Id,
+                        SourceLatitude = el.SourceLatitude,
+                        SourceLongitude = el.SourceLongitude,
+                        TargetLatitude = el.TargetLatitude,
+                        TargetLongitude = el.TargetLongitude,
+                        Remarks = el.Remarks
+                    }).ToList()
+            }).ToList();
+        }
+
         public EstablishmentLocationResponse ToEstablishmentLocationResponse(EstablishmentLocationEntity establishmentLocationEntity)
         {
             return new EstablishmentLocationResponse
