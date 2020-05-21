@@ -222,7 +222,46 @@ namespace BetterHere.Common.Services
             }
         }
 
-        public async Task<Response> GetEstablishmentAsync(string name, string urlBase, string servicePrefix, string controller)
+        public async Task<Response> GetEstablishmentAsync(string urlBase, string servicePrefix, string controller)
+        {
+            try
+            {
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase),
+                };
+
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.GetAsync(url);
+                string result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                EstablishmentResponse model = JsonConvert.DeserializeObject<EstablishmentResponse>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = model
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<Response> GetEstablishmentDetailAsync(string name, string urlBase, string servicePrefix, string controller)
         {
             try
             {

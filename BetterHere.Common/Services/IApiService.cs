@@ -17,7 +17,9 @@ namespace BetterHere.Common.Services
 
         Task<Response> PutAsync<T>(string urlBase, string servicePrefix, string controller, T model, string tokenType, string accessToken);
 
-        Task<Response> GetEstablishmentAsync(string name, string urlBase, string servicePrefix, string controller);
+        Task<Response> GetEstablishmentAsync(string urlBase, string servicePrefix, string controller);
+
+        Task<Response> GetEstablishmentDetailAsync(string name, string urlBase, string servicePrefix, string controller);
 
         Task<Response> NewEstablishmentAsync(string urlBase, string servicePrefix, string controller, EstablishmentRequest model, string tokenType, string accessToken);
 
