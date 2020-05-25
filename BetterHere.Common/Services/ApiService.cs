@@ -1,6 +1,7 @@
 ﻿using BetterHere.Common.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -244,12 +245,12 @@ namespace BetterHere.Common.Services
                     };
                 }
                 
-                EstablishmentResponse establishment = JsonConvert.DeserializeObject<EstablishmentResponse>(answer);
+                var establishment = JsonConvert.DeserializeObject<List<EstablishmentResponse>>(answer);
 
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = answer,
+                    Result = establishment,
                 };
             }
             catch (Exception ex)

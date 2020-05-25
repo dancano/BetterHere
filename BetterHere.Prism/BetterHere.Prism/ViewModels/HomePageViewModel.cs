@@ -1,6 +1,9 @@
 ﻿using BetterHere.Common.Models;
 using BetterHere.Common.Services;
 using Prism.Navigation;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Essentials;
 
 namespace BetterHere.Prism.ViewModels
@@ -10,7 +13,7 @@ namespace BetterHere.Prism.ViewModels
         private bool _isRunning;
         private readonly IApiService _apiService;
         private readonly INavigationService _navigationService;
-        private EstablishmentResponse _establishment;
+        private ObservableCollection<EstablishmentResponse> _establishments;
 
         public HomePageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
         {
@@ -26,16 +29,16 @@ namespace BetterHere.Prism.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
-        public EstablishmentResponse Establishment
+        public ObservableCollection<EstablishmentResponse> Establishments
         {
-            get => _establishment;
-            set => SetProperty(ref _establishment, value);
+            get => _establishments;
+            set => SetProperty(ref _establishments, value);
         }
 
         private async void LoadEstablishment()
         {
             IsRunning = true;
-            var url = App.Current.Resources["UrlAPI"].ToString();
+            string url = App.Current.Resources["UrlAPI"].ToString();
 
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
@@ -47,7 +50,14 @@ namespace BetterHere.Prism.ViewModels
 
             Response response = await _apiService.GetEstablishmentAsync(url, "api", "/establishment");
 
-            Establishment = (EstablishmentResponse)response.Result;
+            List<EstablishmentResponse> establishments = (List<EstablishmentResponse>)response.Result;
+            Establishments = new ObservableCollection<EstablishmentResponse>(establishments.Select(e => new EstablishmentItemViewModelViewModel(_navigationService)
+            {
+                Id = e.Id,
+                Name = e.Name,
+                LogoEstablishmentPath = e.LogoEstablishmentPath,
+                EstablishmentLocations = e.EstablishmentLocations
+            }).ToList());
 
         }
     }

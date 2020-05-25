@@ -33,15 +33,15 @@ namespace BetterHere.Common.Helpers
             set => AppSettings.AddOrUpdateValue(_isLogin, value);
         }
 
-        public static bool Establishment
+        public static string Establishment
         {
-            get => AppSettings.GetValueOrDefault(_establishment, _boolDefault);
+            get => AppSettings.GetValueOrDefault(_establishment, _stringDefault);
             set => AppSettings.AddOrUpdateValue(_establishment, value);
         }
 
-        public static bool EstablishmentLocation
+        public static string EstablishmentLocation
         {
-            get => AppSettings.GetValueOrDefault(_establishmentLocation, _boolDefault);
+            get => AppSettings.GetValueOrDefault(_establishmentLocation, _stringDefault);
             set => AppSettings.AddOrUpdateValue(_establishmentLocation, value);
         }
     }

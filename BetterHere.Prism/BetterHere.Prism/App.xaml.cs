@@ -43,6 +43,8 @@ namespace BetterHere.Prism
             containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
             containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<EstablishmentItemViewModel, EstablishmentItemViewModelViewModel>();
+            containerRegistry.RegisterForNavigation<EstablishmentLocationPage, EstablishmentLocationPageViewModel>();
         }
     }
 }
