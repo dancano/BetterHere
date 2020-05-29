@@ -5,5 +5,36 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BetterHere.Prism.Views.EstablishmentLocationPage"
              Title="{Binding Title}">
-  
+    <ContentPage.Content>
+        <CollectionView ItemsSource="{Binding Establishment.EstablishmentLocations}"
+                            SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectLocationCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                                   Text="{Binding SourceLongitude}"
+                                   VerticalOptions="Center"/>
+                        <Label Grid.Column="1"
+                                   Text="{Binding SourceLatitude}"
+                                   VerticalOptions="Center"/>
+                        <Image Grid.Column="3" 
+                               Source="ic_more_vert.png" 
+                               Aspect="AspectFit"
+                               HeightRequest="60" 
+                               WidthRequest="60" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
 </ContentPage>
