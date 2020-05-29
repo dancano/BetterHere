@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="BetterHere.Prism.Views.HomePage">
+             x:Class="BetterHere.Prism.Views.HomePage"
+             Title="{Binding Title}">
 
     <ContentPage.Content>
         <CollectionView ItemsSource="{Binding Establishments}"
