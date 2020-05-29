@@ -35,11 +35,13 @@ namespace BetterHere.Web.Controllers.API
             _blobHelper = blobHelper;
         }
 
-        // GET: api/Trips
+        // GET: api/Establishment
         [HttpGet]
-        public IEnumerable<EstablishmentEntity> GetEstablishments()
+        public async Task<IActionResult> GetEstablishments()
         {
-            return _context.Establishments;
+            List<EstablishmentEntity> establishments = _context.Establishments.Include(e => e.EstablishmentLocations).ToList();
+
+            return Ok(_converterHelper.ToEstablishmentResponse(establishments));
         }
 
         [HttpGet("{name}")]

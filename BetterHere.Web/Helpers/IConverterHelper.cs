@@ -1,5 +1,6 @@
 ﻿using BetterHere.Common.Models;
 using BetterHere.Web.Data.Entities;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Collections.Generic;
 
 namespace BetterHere.Web.Helpers

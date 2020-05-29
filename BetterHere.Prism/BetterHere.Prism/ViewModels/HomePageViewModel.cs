@@ -51,7 +51,7 @@ namespace BetterHere.Prism.ViewModels
             Response response = await _apiService.GetEstablishmentAsync(url, "api", "/establishment");
 
             List<EstablishmentResponse> establishments = (List<EstablishmentResponse>)response.Result;
-            Establishments = new ObservableCollection<EstablishmentResponse>(establishments.Select(e => new EstablishmentItemViewModelViewModel(_navigationService)
+            Establishments = new ObservableCollection<EstablishmentResponse>(establishments.Select(e => new EstablishmentItemViewModel(_navigationService)
             {
                 Id = e.Id,
                 Name = e.Name,

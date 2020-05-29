@@ -19,7 +19,7 @@ namespace BetterHere.Prism.ViewModels
         public EstablishmentLocationPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             _navigationService = navigationService;
-            Title = "Trip Detail";
+            Title = "Establishments Locations";
         }
 
         public bool IsRunning
@@ -44,7 +44,7 @@ namespace BetterHere.Prism.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            if (parameters.ContainsKey("trip"))
+            if (parameters.ContainsKey("establishment"))
             {
                 Establishment = parameters.GetValue<EstablishmentResponse>("establishment");
             }

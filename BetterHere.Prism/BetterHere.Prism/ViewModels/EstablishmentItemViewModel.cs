@@ -1,22 +1,18 @@
 ﻿using BetterHere.Common.Helpers;
 using BetterHere.Common.Models;
+using BetterHere.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace BetterHere.Prism.ViewModels
 {
-    public class EstablishmentItemViewModelViewModel : EstablishmentResponse
+    public class EstablishmentItemViewModel : EstablishmentResponse
     {
         private readonly INavigationService _navigationService;
         private DelegateCommand _selectEstablishmentCommand;
 
-        public EstablishmentItemViewModelViewModel(INavigationService navigationService)
+        public EstablishmentItemViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
         }
@@ -26,13 +22,13 @@ namespace BetterHere.Prism.ViewModels
 
         private async void SelectEstablishmentAsync()
         {
-            var parameters = new NavigationParameters
+            NavigationParameters parameters = new NavigationParameters
             {
-                {"establishmentList", this }
+                {"establishment", this }
             };
 
             Settings.Establishment = JsonConvert.SerializeObject(this);
-            await _navigationService.NavigateAsync(nameof(EstablishmentLocationPageViewModel), parameters);
+            await _navigationService.NavigateAsync(nameof(EstablishmentLocationPage), parameters);
 
         }
     }
