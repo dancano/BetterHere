@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 @import url(font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
 
@@ -1876,7 +1876,7 @@
 
 /* Button */
 
-	input[type="submit"],
+	/*input[type="submit"],*/
 	input[type="reset"],
 	input[type="button"],
 	button,
@@ -1903,7 +1903,7 @@
 		white-space: nowrap;
 	}
 
-		input[type="submit"].icon,
+		/*input[type="submit"].icon,*/
 		input[type="reset"].icon,
 		input[type="button"].icon,
 		button.icon,
@@ -1911,7 +1911,7 @@
 			padding-left: 1.35rem;
 		}
 
-			input[type="submit"].icon:before,
+			/*input[type="submit"].icon:before,*/
 			input[type="reset"].icon:before,
 			input[type="button"].icon:before,
 			button.icon:before,
@@ -1919,7 +1919,7 @@
 				margin-right: 0.5rem;
 			}
 
-		input[type="submit"].fit,
+		/*input[type="submit"].fit,*/
 		input[type="reset"].fit,
 		input[type="button"].fit,
 		button.fit,
@@ -1929,7 +1929,7 @@
 			width: 100%;
 		}
 
-		input[type="submit"].small,
+		/*input[type="submit"].small,*/
 		input[type="reset"].small,
 		input[type="button"].small,
 		button.small,
@@ -1937,7 +1937,7 @@
 			font-size: 0.8rem;
 		}
 
-		input[type="submit"].big,
+		/*input[type="submit"].big,*/
 		input[type="reset"].big,
 		input[type="button"].big,
 		button.big,
@@ -1945,7 +1945,7 @@
 			font-size: 1.35rem;
 		}
 
-		input[type="submit"].disabled, input[type="submit"]:disabled,
+		/*input[type="submit"].disabled, input[type="submit"]:disabled,*/
 		input[type="reset"].disabled,
 		input[type="reset"]:disabled,
 		input[type="button"].disabled,
@@ -1963,7 +1963,7 @@
 
 		@media screen and (max-width: 480px) {
 
-			input[type="submit"],
+			/*input[type="submit"],*/
 			input[type="reset"],
 			input[type="button"],
 			button,
@@ -1974,7 +1974,7 @@
 
 		}
 
-	input[type="submit"],
+	/*input[type="submit"],*/
 	input[type="reset"],
 	input[type="button"],
 	button,
@@ -1983,7 +1983,7 @@
 		color: #000 !important;
 	}
 
-		input[type="submit"]:hover,
+		/*input[type="submit"]:hover,*/
 		input[type="reset"]:hover,
 		input[type="button"]:hover,
 		button:hover,
@@ -4310,3 +4310,32 @@
 			}
 
 		}
+
+		/* Kimberly Styles  */
+/******************************************************/
+:root {
+	--my-color-background: #353C41;
+	--my-color-primary: #5D6B99;
+	--my-color-secondary: #fff;
+}
+
+
+.my-shadow {
+	-webkit-box-shadow: 1px 2px 8px 4px rgba(0,0,0,0.65);
+	-moz-box-shadow: 1px 2px 8px 4px rgba(0,0,0,0.65);
+	box-shadow: 1px 2px 8px 4px rgba(0,0,0,0.65);
+}
+
+.my-body-background {
+	background-color: var(--my-color-background);
+}
+
+.my-btn-primary {
+	color: #fff;
+	background-color: var(--my-color-primary);
+	border-color: #425594;
+}
+
+.text-secondary {
+	color: var(--my-color-secondary) !important;
+}

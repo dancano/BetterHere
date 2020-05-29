@@ -6,33 +6,43 @@
     <title>@ViewData["Title"] - BetterHere.Web</title>
     <link rel="stylesheet" href="~/css/main.css" />
 </head>
-
-<body>
-    <div class="page-header">
-        <!-- Header -->
-        <header id="header" class="alt">
-            <div class="logo"><a href="index.html">Better Here <span>by Better Here</span></a></div>
-            <a href="#menu">Menu</a>
-        </header>
-        <!-- Nav -->
-        <nav id="menu">
-            <ul class="links">
-                <li><a asp-area="" asp-controller="Establishments" asp-action="Index">Establishments</a></li>
-                <li><a asp-area="" asp-controller="TypeEstablishments" asp-action="Index">Type Establishments</a></li>
-                <li><a asp-area="" asp-controller="TypeFoods" asp-action="Index">Type Food</a></li>
-            </ul>
-        </nav>
+<body class="@ViewData["BodyColorClass"]">
+    <style>
+        #header.alt {
+            /*background-color: transparent;*/
+            background-color: @(ViewData["BodyColorExplicit"]);
+        }
+    </style>
+    <div class="test">
+        <div class="test page-header">
+            <div>
+                <!-- Header -->
+                <header id="header" class="alt">
+                    <div class="logo">
+                        <a href="index.html">Better Here <span>by Better Here</span></a>
+                    </div>
+                    <a href="#menu">Menu</a>
+                </header>
+                <!-- Nav -->
+                <nav id="menu">
+                    <ul class="links">
+                        <li><a asp-area="" asp-controller="Establishments" asp-action="Index">Establishments</a></li>
+                        <li><a asp-area="" asp-controller="TypeEstablishments" asp-action="Index">Type Establishments</a></li>
+                        <li><a asp-area="" asp-controller="TypeFoods" asp-action="Index">Type Food</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
-
     <partial name="_CookieConsentPartial" />
-
-    <div class="body-content">
+    <div class="body-content @ViewData["BodyColorClass"]">
 
         @RenderBody()
         <hr />
 
         <!-- Footer -->
-        <footer id="footer">
+        <footer id="footer" class="footer-zone">
             <div class="container">
                 <ul class="icons">
                     <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -49,5 +59,13 @@
     </div>
 
     @RenderSection("Scripts", required: false)
+    <!-- Scripts -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery.scrollex.min.js"></script>
+    <script src="~/js/skel.min.js"></script>
+    <script src="~/js/util.js"></script>
+    <script src="~/js/main.js"></script>
+
+
 </body>
 </html>
