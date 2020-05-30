@@ -19,7 +19,10 @@
                 <!-- Header -->
                 <header id="header" class="alt">
                     <div class="logo">
-                        <a asp-controller="Home" asp-action="Index">Better Here <span>by Better Here</span></a>
+                        <a asp-controller="Home" asp-action="Index">
+                            <img src="~/images/BetterHere.png" style="width:48px;height:48px;max-width: 100%; height: auto;" /> 
+                            Better Here <span>by Better Here</span>
+                        </a>
                     </div>
                     <a href="#menu">Menu</a>
                 </header>
@@ -29,7 +32,17 @@
                         <li><a asp-area="" asp-controller="Establishments" asp-action="Index">Establishments</a></li>
                         <li><a asp-area="" asp-controller="TypeEstablishments" asp-action="Index">Type Establishments</a></li>
                         <li><a asp-area="" asp-controller="TypeFoods" asp-action="Index">Type Food</a></li>
-                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a asp-area="" style="text-decoration: underline;" asp-controller="Account" asp-action="ChangeUser">@User.Identity.Name</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                        }
+
+
                     </ul>
                 </nav>
             </div>
@@ -37,7 +50,6 @@
     </div>
     <partial name="_CookieConsentPartial" />
     <div class="body-content @ViewData["BodyColorClass"]">
-
         @RenderBody()
         <hr />
 

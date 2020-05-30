@@ -9,6 +9,7 @@
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
+<br />
 <div class="container">
     <p> <a asp-action="Create" class="btn my-btn-primary">Create New</a> </p>
 
@@ -80,7 +81,7 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                           <img src="@Url.Content(item.PictureFullPathEstablishment)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />                          
+                            <img src="@Url.Content(item.PictureFullPathEstablishment)" class="img-rounded" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn my-btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>

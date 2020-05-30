@@ -4442,3 +4442,7 @@ option {
 #MyTable label, a {
 	color: var(--my-color-secondary) !important;
 }*/
+
+#header {
+	height: 55px;
+}
