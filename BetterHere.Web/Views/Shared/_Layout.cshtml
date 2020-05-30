@@ -19,7 +19,7 @@
                 <!-- Header -->
                 <header id="header" class="alt">
                     <div class="logo">
-                        <a href="index.html">Better Here <span>by Better Here</span></a>
+                        <a asp-controller="Home" asp-action="Index">Better Here <span>by Better Here</span></a>
                     </div>
                     <a href="#menu">Menu</a>
                 </header>
@@ -61,6 +61,7 @@
     @RenderSection("Scripts", required: false)
     <!-- Scripts -->
     <script src="~/js/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="~/js/jquery.scrollex.min.js"></script>
     <script src="~/js/skel.min.js"></script>
     <script src="~/js/util.js"></script>

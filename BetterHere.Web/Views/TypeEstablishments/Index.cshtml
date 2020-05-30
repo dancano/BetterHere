@@ -2,45 +2,106 @@
 
 @{
     ViewData["Title"] = "Index";
+    ViewData["BodyColorExplicit"] = "#F2AB27";
+    ViewData["BodyColorClass"] = "my-body-background";
 }
 
-        <!-- Header -->
-        <header id="header" class="alt">
-            <div class="logo"><a href="index.html">Better Here <span>by Better Here</span></a></div>
-            <a href="#menu">Menu</a>
-        </header>
-        <!-- Nav -->
-        <nav id="menu">
-            <ul class="links">
-                <li><a asp-area="" asp-controller="Establishments" asp-action="Index">Establishments</a></li>
-                <li><a asp-area="" asp-controller="TypeEstablishments" asp-action="Index">Type Establishments</a></li>
-                <li><a asp-area="" asp-controller="TypeFoods" asp-action="Index">Type Food</a></li>
-            </ul>
-        </nav>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NameType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameType)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+
+<div class="container">
+    <p><a asp-action="Create" class="btn my-btn-primary">Create New</a></p>
+
+    @*<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h4 class="text-secondary"> @Html.DisplayNameFor(model => model.NameType)</h4>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-secondary">
+                            @Html.DisplayFor(modelItem => item.NameType)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>*@
+
+<div class="table-responsive text-secondary">
+
+    <table class="table table-bordered text-secondary my-table" id="MyTable" width="100%" cellspacing="0">
+        @*<table class="my-table text-secondary" id="MyTable" width="100%" cellspacing="0">*@
+            <thead>
+                <tr>
+                    <th style="cursor: pointer;" class="text-secondary">
+                        @Html.DisplayNameFor(model => model.NameType)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th class="text-secondary">
+                        @Html.DisplayNameFor(model => model.NameType)
+                    </th>
+                    <th></th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="tr-item">
+                        <td class="text-secondary">
+                            @Html.DisplayFor(modelItem => item.NameType)
+                        </td>
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn my-btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon-align-justify"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn my-btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+
+
+
+</div>
+
+<partial name="_DeleteDialog" />
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="/js/deleteDialog.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#MyTable').DataTable();
+                // Delete item
+                sc_deleteDialog.openModal('deleteItem', true, 'btnYesDelete', '/Teams/Delete/', false);
+            });
+        </script>
+    }*@
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#MyTable').DataTable();
+    });
+
+</script>

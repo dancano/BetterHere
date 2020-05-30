@@ -2230,14 +2230,15 @@
 		color: #555;
 	}
 
-	input[type="text"],
-	input[type="password"],
-	input[type="email"],
-	select,
-	textarea {
-		background: rgba(144, 144, 144, 0.075);
-		border-color: rgba(144, 144, 144, 0.25);
-	}
+input[type="text"],
+input[type="password"],
+input[type="email"],	
+input[type="file"],
+select,
+textarea {
+	background: rgba(144, 144, 144, 0.075);
+	border-color: rgba(144, 144, 144, 0.25);
+}
 
 		input[type="text"]:focus,
 		input[type="password"]:focus,
@@ -4314,9 +4315,21 @@
 		/* Kimberly Styles  */
 /******************************************************/
 :root {
-	--my-color-background: #353C41;
+	/*--my-color-background: #353C41;
 	--my-color-primary: #5D6B99;
-	--my-color-secondary: #fff;
+	--my-color-primary: #F2AB27;
+	--my-color-primary-dark: #D97D0D;
+	--my-color-accent: #732002;
+	--my-color-accent-hover: #902804;
+	--my-color-secondary: #fff;*/
+	--my-color-background: #F2AB27;
+	--my-color-primary: #732002;
+	--my-color-danger: #732002;
+	--my-color-warning: #323E40;
+	--my-color-accent: #732002;
+	--my-color-accent-hover: #f4a900;
+	--my-color-success: #D97D0D;
+	--my-color-secondary: #000000;
 }
 
 
@@ -4327,15 +4340,105 @@
 }
 
 .my-body-background {
-	background-color: var(--my-color-background);
+	background-color: var(--my-color-background) !important;
 }
+
+
 
 .my-btn-primary {
 	color: #fff;
 	background-color: var(--my-color-primary);
 	border-color: #425594;
 }
+.my-btn-success {
+	color: #fff;
+	background-color: var(--my-color-success);
+	border-color: #425594;
+}
+.my-btn-warning {
+	color: #fff;
+	background-color: var(--my-color-warning);
+	border-color: #425594;
+}
+.my-btn-danger {
+	color: #fff;
+	background-color: var(--my-color-danger);
+	border-color: #425594;
+}
 
 .text-secondary {
 	color: var(--my-color-secondary) !important;
 }
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select, textarea {
+    color: var(--my-color-secondary) !important;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	color: #909 !important;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color: #909 !important;
+	opacity: 1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color: #909 !important;
+	opacity: 1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: #909 !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+	color: #909 !important;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+	color: #909 !important;
+}
+
+
+select {
+    background: rgba(144, 144, 144, 0.075) !important;
+    border-color: rgba(144, 144, 144, 0.25) !important;
+}
+
+option {
+	color: var(--my-color-secondary) !important;
+	background-color: var(--my-color-background);
+}
+
+.input-validation-error {
+	border-color: red;
+}
+
+.my-table {
+	background-color: var(--my-color-background);
+}
+	.my-table tbody tr {
+		background-color: var(--my-color-background) !important;
+	}
+
+	/*.my-table tr:hover {
+		background-color: #000 !important;
+	}*/
+.tr-item:hover {
+	background-color: var(--my-color-accent-hover) !important;
+}
+
+/*table label {
+	color: var(--my-color-secondary) !important;
+}*/
+/*#MyTable {
+	color: var(--my-color-secondary) !important;
+}
+#MyTable label, a {
+	color: var(--my-color-secondary) !important;
+}*/

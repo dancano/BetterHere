@@ -2,44 +2,110 @@
 
 @{
     ViewData["Title"] = "Index";
+    ViewData["BodyColorExplicit"] = "#F2AB27";
+    ViewData["BodyColorClass"] = "my-body-background";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LogoEstablishmentPath)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @if (!string.IsNullOrEmpty(item.LogoEstablishmentPath))
-                    {
-                        <img src="@Url.Content(item.LogoEstablishmentPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
-                    }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+<div class="container">
+    <p> <a asp-action="Create" class="btn my-btn-primary">Create New</a> </p>
+
+    @*<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LogoEstablishmentPath)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.LogoEstablishmentPath))
+                            {
+                                <img src="@Url.Content(item.LogoEstablishmentPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>*@
+
+    <div class="table-responsive text-secondary">
+
+        <table class="table table-bordered text-secondary my-table" id="MyTable" width="100%" cellspacing="0">
+            @*<table class="my-table text-secondary" id="MyTable" width="100%" cellspacing="0">*@
+            <thead>
+                <tr>
+                    <th style="cursor: pointer;" class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th style="cursor: pointer;" class="text-secondary">
+                        @Html.DisplayNameFor(model => model.LogoEstablishmentPath)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th class="text-secondary">
+                        @Html.DisplayNameFor(model => model.LogoEstablishmentPath)
+                    </th>
+                    <th></th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="tr-item">
+                        <td class="text-secondary">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                           <img src="@Url.Content(item.PictureFullPathEstablishment)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />                          
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn my-btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon-align-justify"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn my-btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#MyTable').DataTable();
+    });
+
+</script>
+
+
 @*
     <partial name="_DeleteDialog" />
 

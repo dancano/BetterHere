@@ -2,70 +2,102 @@
 
 @{
     ViewData["Title"] = "Register";
+    ViewData["BodyColorExplicit"] = "#F2AB27";
+    ViewData["BodyColorClass"] = "my-body-background";
 }
 
-    <div>
-        <!-- Header -->
-        <header id="header" class="alt">
-            <div class="logo"><a href="index.html">Better Here <span>by Better Here</span></a></div>
-            <a href="#menu">Menu</a>
-        </header>
-        <!-- Nav -->
-        <nav id="menu">
-            <ul class="links">
-                <li><a asp-area="" asp-controller="Establishments" asp-action="Index">Establishments</a></li>
-                <li><a asp-area="" asp-controller="TypeEstablishments" asp-action="Index">Type Establishments</a></li>
-                <li><a asp-area="" asp-controller="TypeFoods" asp-action="Index">Type Food</a></li>
-            </ul>
-        </nav>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<div class="container">
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="center-block">
+            <h2 class="text-center text-secondary">Register</h2>
+
+            <form asp-action="Register" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label text-secondary"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <partial name="_User" />
+
+                <div class="form-group">
+                    <label asp-for="UserTypeId" class="control-label text-secondary"></label>
+                    <select asp-for="UserTypeId" asp-items="Model.UserTypes" class="form-control"></select>
+                    <span asp-validation-for="UserTypeId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label text-secondary"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PasswordConfirm" class="control-label text-secondary"></label>
+                    <input asp-for="PasswordConfirm" class="form-control" />
+                    <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn my-btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 
-<h2>Register</h2>
 
-<h4>User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @*<div class="row">
+            <div class="col-md-4">
+                <form asp-action="Register" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+
+                    <partial name="_User" />
+
+                    <div class="form-group">
+                        <label asp-for="UserTypeId" class="control-label"></label>
+                        <select asp-for="UserTypeId" asp-items="Model.UserTypes" class="form-control"></select>
+                        <span asp-validation-for="UserTypeId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PasswordConfirm" class="control-label"></label>
+                        <input asp-for="PasswordConfirm" class="form-control" />
+                        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Register" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
+        </div>*@
 
-            <partial name="_User" />
 
-            <div class="form-group">
-                <label asp-for="UserTypeId" class="control-label"></label>
-                <select asp-for="UserTypeId" asp-items="Model.UserTypes" class="form-control"></select>
-                <span asp-validation-for="UserTypeId" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PasswordConfirm" class="control-label"></label>
-                <input asp-for="PasswordConfirm" class="form-control" />
-                <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="text-success">
+        <p>
+            @ViewBag.Message
+        </p>
     </div>
 </div>
-<div class="text-success">
-    <p>
-        @ViewBag.Message
-    </p>
-</div>
+
+
 
 
 @section Scripts {
