@@ -7,7 +7,6 @@ namespace BetterHere.Common.Models
 {
     public class EstablishmentRequest
     {
-        [Required(ErrorMessage = "The field {0} is mandatory.")]
         public Guid UserId { get; set; }
 
         [Required]

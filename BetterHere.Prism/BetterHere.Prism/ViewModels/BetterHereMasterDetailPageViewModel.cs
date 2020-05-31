@@ -1,4 +1,5 @@
-﻿using BetterHere.Common.Models;
+﻿using BetterHere.Common.Helpers;
+using BetterHere.Common.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -47,7 +48,7 @@ namespace BetterHere.Prism.ViewModels
                 {
                     Icon = "ic_exit_to_app",
                     PageName = "LoginPage",
-                    Title = "Log in"
+                    Title = Settings.IsLogin ? "Logout" : "Login"
                 }
             };
 

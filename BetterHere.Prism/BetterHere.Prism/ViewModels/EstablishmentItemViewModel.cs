@@ -20,6 +20,8 @@ namespace BetterHere.Prism.ViewModels
         public DelegateCommand SelectEstablishmentCommand => _selectEstablishmentCommand ??
             (_selectEstablishmentCommand = new DelegateCommand(SelectEstablishmentAsync));
 
+
+
         private async void SelectEstablishmentAsync()
         {
             NavigationParameters parameters = new NavigationParameters
@@ -31,5 +33,7 @@ namespace BetterHere.Prism.ViewModels
             await _navigationService.NavigateAsync(nameof(EstablishmentLocationPage), parameters);
 
         }
+
+
     }
 }

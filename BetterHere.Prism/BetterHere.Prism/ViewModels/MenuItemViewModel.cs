@@ -1,4 +1,5 @@
-﻿using BetterHere.Common.Models;
+﻿using BetterHere.Common.Helpers;
+using BetterHere.Common.Models;
 using Prism.Commands;
 using Prism.Navigation;
 
@@ -19,7 +20,19 @@ namespace BetterHere.Prism.ViewModels
 
         private async void SelectMenuAsync()
         {
-            await _navigationService.NavigateAsync($"/BetterHereMasterDetailPage/NavigationPage/{PageName}");
+            if (PageName == "LoginPage" && Settings.IsLogin == true)
+            {
+                Settings.IsLogin = false;
+                Settings.User = null;
+                Settings.Token = null;
+
+                await _navigationService.NavigateAsync($"/BetterHereMasterDetailPage/NavigationPage/HomePage");
+            }
+            else
+            {
+                await _navigationService.NavigateAsync($"/BetterHereMasterDetailPage/NavigationPage/{PageName}");
+            }
+            
         }
     }
 }
