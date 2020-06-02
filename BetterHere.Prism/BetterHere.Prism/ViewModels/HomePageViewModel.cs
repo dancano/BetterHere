@@ -1,6 +1,10 @@
-﻿using BetterHere.Common.Models;
+﻿using BetterHere.Common.Helpers;
+using BetterHere.Common.Models;
 using BetterHere.Common.Services;
+using BetterHere.Prism.Views;
+using Prism.Commands;
 using Prism.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +17,7 @@ namespace BetterHere.Prism.ViewModels
         private bool _isRunning;
         private readonly IApiService _apiService;
         private readonly INavigationService _navigationService;
+        private DelegateCommand _addEstablishmentCommand;
         private ObservableCollection<EstablishmentResponse> _establishments;
 
         public HomePageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
@@ -22,6 +27,9 @@ namespace BetterHere.Prism.ViewModels
             Title = "Establishments";
             LoadEstablishment();
         }
+
+        public DelegateCommand AddEstablishmentCommand => _addEstablishmentCommand ??
+            (_addEstablishmentCommand = new DelegateCommand(AddEstablishmentAsync));
 
         public bool IsRunning
         {
@@ -50,6 +58,7 @@ namespace BetterHere.Prism.ViewModels
 
             Response response = await _apiService.GetEstablishmentAsync(url, "api", "/establishment");
 
+            IsRunning = false;
             List<EstablishmentResponse> establishments = (List<EstablishmentResponse>)response.Result;
             Establishments = new ObservableCollection<EstablishmentResponse>(establishments.Select(e => new EstablishmentItemViewModel(_navigationService)
             {
@@ -58,7 +67,20 @@ namespace BetterHere.Prism.ViewModels
                 LogoEstablishmentPath = e.LogoEstablishmentPath,
                 EstablishmentLocations = e.EstablishmentLocations
             }).ToList());
-
+        }
+        private async void AddEstablishmentAsync()
+        {
+            IsRunning = true;
+            if (Settings.IsLogin == true)
+            {
+                IsRunning = false;
+                await _navigationService.NavigateAsync($"/BetterHereMasterDetailPage/NavigationPage/AddEstablishmentPage");
+            }
+            else
+            {
+                IsRunning = false;
+                await _navigationService.NavigateAsync($"/BetterHereMasterDetailPage/NavigationPage/LoginPage");
+            }
         }
     }
 }

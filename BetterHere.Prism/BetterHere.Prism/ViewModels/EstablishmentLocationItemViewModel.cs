@@ -27,7 +27,7 @@ namespace BetterHere.Prism.ViewModels
         {
             NavigationParameters parameters = new NavigationParameters
             {
-                {"location", this }
+                {"Location", this }
             };
 
             Settings.EstablishmentLocation = JsonConvert.SerializeObject(this);

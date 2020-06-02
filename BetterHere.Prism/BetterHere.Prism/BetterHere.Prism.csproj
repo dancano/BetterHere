@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="18.1.0.52" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="18.1.0.54" />
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="18.1.0.53" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.1.0.53" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
