@@ -447,11 +447,11 @@ namespace BetterHere.Common.Services
                     };
                 }
 
-                FoodResponse trip = JsonConvert.DeserializeObject<FoodResponse>(answer);
+                var foods = JsonConvert.DeserializeObject<List<FoodResponse>>(answer);
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = trip,
+                    Result = foods,
                 };
             }
             catch (Exception ex)

@@ -37,7 +37,20 @@ namespace BetterHere.Web.Helpers
                         SourceLongitude = el.SourceLongitude,
                         TargetLatitude = el.TargetLatitude,
                         TargetLongitude = el.TargetLongitude,
-                        Remarks = el.Remarks
+                        Remarks = el.Remarks,
+                        Cities = ToCityResponse(el.Cities),
+                        TypeEstablishment = ToTypeEstablishmentResponse(el.TypeEstablishment),
+                        Foods = el.Foods?.Select(f => new FoodResponse
+                        {
+                            Id = f.Id,
+                            FoodName = f.FoodName,
+                            Qualification = f.Qualification,
+                            Remarks = f.Remarks,
+                            PicturePathFood = f.PicturePathFood,
+                            EstablishmentLocationId = el.Id.ToString(),                  
+                            TypeFoods = ToTypeFoodResponse(f.TypeFoods),
+                            User = ToUserResponse(f.User)
+                        }).ToList()
                     }).ToList()
             };
         }
@@ -99,17 +112,7 @@ namespace BetterHere.Web.Helpers
                 SourceLongitude = el.SourceLatitude,
                 TargetLongitude = el.TargetLongitude,
                 Cities = ToCityResponse(el.Cities),
-                TypeEstablishment = ToTypeEstablishmentResponse(el.TypeEstablishment),
-                Foods = el.Foods?.Select(f => new FoodResponse
-                {
-                    Id = f.Id,
-                    FoodName = f.FoodName,
-                    PicturePathFood = f.PicturePathFood,
-                    Qualification = f.Qualification,
-                    Remarks = f.Remarks,
-                    User = ToUserResponse(f.User),
-                    TypeFoods = ToTypeFoodResponse(f.TypeFoods)
-                }).ToList()
+                TypeEstablishment = ToTypeEstablishmentResponse(el.TypeEstablishment)
             }).ToList();
         }
 

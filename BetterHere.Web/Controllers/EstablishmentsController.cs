@@ -1,6 +1,7 @@
 ﻿using BetterHere.Web.Data;
 using BetterHere.Web.Data.Entities;
 using BetterHere.Web.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.ResultOperators.Internal;

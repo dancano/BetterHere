@@ -2,40 +2,79 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="BetterHere.Prism.Views.HomePage">
+             x:Class="BetterHere.Prism.Views.HomePage"
+             Title="{Binding Title}">
 
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Establishments}"
-                            SelectionMode="Single">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SelectEstablishmentCommand}"/>
-                            </Grid.GestureRecognizers>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0"
-                                   Text="{Binding Name}"
-                                   VerticalOptions="Center"/>
-                            <Label Grid.Column="1"
-                                   Text="{Binding LogoEstablishmentPath}"
-                                   VerticalOptions="Center"/>
-                            <Image Grid.Column="3" 
-                               Source="ic_more_vert.png" 
-                               Aspect="AspectFit"
-                               HeightRequest="60" 
-                               WidthRequest="60" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-    </ContentPage.Content>
+    <AbsoluteLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
+
+            <ScrollView Grid.Row="0">
+                <CollectionView ItemsSource="{Binding Establishments}"
+                                SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectEstablishmentCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Text="{Binding Name}"
+                                       VerticalOptions="Center"/>
+                                <Label Grid.Column="1"
+                                       Text="{Binding LogoEstablishmentPath}"
+                                       VerticalOptions="Center"/>
+                                <Image Grid.Column="3" 
+                                   Source="ic_more_vert.png" 
+                                   Aspect="AspectFit"
+                                   HeightRequest="60" 
+                                   WidthRequest="60" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+
+            <Button Grid.Row="0" 
+                    Text="+" 
+                    BorderColor="#2b3c3c" 
+                    BorderWidth="0.5" 
+                    FontAttributes="Bold" 
+                    BorderRadius="80"
+                    FontSize="Title"
+                    TextColor="White" 
+                    HorizontalOptions="End" 
+                    WidthRequest="60" 
+                    HeightRequest="60" 
+                    Margin="0,0,10,5" 
+                    VerticalOptions="End"
+                    Command="{Binding AddEstablishmentCommand}"/>
+
+        </Grid>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                                AbsoluteLayout.LayoutFlags="All"
+                	                                BackgroundColor="{StaticResource ColorAccent}"
+                	                                HorizontalOptions="Center"
+                	                                TextColor="{StaticResource ColorFontInverse}"
+                	                                IsVisible="{Binding IsRunning}"
+                	                                Title="Loading..."
+                	                                VerticalOptions="Center"
+                	                                ViewBoxWidth="80"
+                	                                ViewBoxHeight="80" />
+    </AbsoluteLayout>
+    </ContentPage.Content>
 </ContentPage>
