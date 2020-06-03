@@ -7,56 +7,31 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BetterHere.Prism.Views.AddEstablishmentPage"
              Title="{Binding Title}">
-    <ContentPage.Content>
-        <StackLayout Padding="15">
-            <AbsoluteLayout>
-                <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
-                                 AbsoluteLayout.LayoutFlags="All">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" 
+
+    
+        <StackLayout>
+            <!--<Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" 
                                    Grid.Column="0"
                                    Text="Nombre"
                                    VerticalOptions="Center"/>
-                        <Entry Grid.Row="0" 
+                <Entry Grid.Row="0" 
                                    Grid.Column="1" 
-                                   BackgroundColor="{StaticResource ColorPrimary}"
+                                   BackgroundColor="Transparent"
                                    HorizontalOptions="FillAndExpand"
                                    Placeholder="Nombre del lugar" 
                                    Text="{Binding Establishment.Name}"/>
-                    </Grid>
+            </Grid>-->
 
-                    <Label></Label>
-                    <Label Text="Foto del Establecimiento" 
-                           FontAttributes="Bold" 
-                           FontSize="Medium" 
-                           HorizontalOptions="CenterAndExpand"/>
-                    <ffimageloading:CachedImage Aspect="AspectFit"
-                                          Source="{Binding Image}"
-                                          CacheDuration= "50"
-                                          HeightRequest="110"
-                                          Margin="5"
-                                          RetryCount= "3"
-                                          RetryDelay= "600">
-                        <ffimageloading:CachedImage.Transformations>
-                            <fftransformations:CircleTransformation />
-                        </ffimageloading:CachedImage.Transformations>
-                        <ffimageloading:CachedImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
-                        </ffimageloading:CachedImage.GestureRecognizers>
-                    </ffimageloading:CachedImage>
-
-
-                    <Button Command="{Binding RegisterEstablishmentCommand}" Text="Add Establishment" IsEnabled="{Binding IsEnable}"/>
-
-                </StackLayout>
-            </AbsoluteLayout>
+            <Button Text="Cambiar Imagen" Command="{Binding ChangeImageCommand}"/>
         </StackLayout>
-    </ContentPage.Content>
+
+
 </ContentPage>

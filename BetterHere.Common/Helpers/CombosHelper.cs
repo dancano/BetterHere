@@ -14,5 +14,32 @@ namespace BetterHere.Common.Helpers
                 new Role { Id = 2, Name = "User" }
             };
         }
+
+        public static List<CityResponse> GetPlaceCities()
+        {
+            return new List<CityResponse>
+            {
+                new CityResponse { Id = 1, Name = "Medellin" },
+                new CityResponse { Id = 2, Name = "Bogotá" },
+                new CityResponse { Id = 3, Name = "Cali" },
+                new CityResponse { Id = 4, Name = "Barranquilla" },
+                new CityResponse { Id = 5, Name = "Cartagena" },
+                new CityResponse { Id = 6, Name = "Pereira" },
+                new CityResponse { Id = 7, Name = "Manizales" },
+                new CityResponse { Id = 8, Name = "Bucaramanga" }
+            };
+        }
+
+        public static List<TypeFoodResponse> GetTypeFood()
+        {
+            return new List<TypeFoodResponse>
+            {
+                new TypeFoodResponse { Id = 1, FoodTypeName = "Arabic" },
+                new TypeFoodResponse { Id = 2, FoodTypeName = "Mexican" },
+                new TypeFoodResponse { Id = 3, FoodTypeName = "Germany" },
+                new TypeFoodResponse { Id = 4, FoodTypeName = "Chinnese" },
+                new TypeFoodResponse { Id = 5, FoodTypeName = "Caribbean" },
+            };
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BetterHere.Common.Helpers;
 using BetterHere.Common.Models;
 using BetterHere.Common.Services;
+using BetterHere.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -20,6 +21,7 @@ namespace BetterHere.Prism.ViewModels
         private bool _isRunning;
         private bool _isEnabled;
         private ObservableCollection<FoodResponse> _foodLocations;
+        private DelegateCommand _addFoodCommand;
 
         public LocationDetailPageViewModel(INavigationService navigationService, IApiService apiService) : base (navigationService)
         {
@@ -27,6 +29,17 @@ namespace BetterHere.Prism.ViewModels
             _apiService = apiService;
             Title = "Location Detail Page";
             LoadFood();
+        }
+
+        public DelegateCommand AddFoodCommand => _addFoodCommand ??
+        (_addFoodCommand = new DelegateCommand(AddFoodAsync));
+
+        private async void AddFoodAsync()
+        {
+            if (Settings.IsLogin)
+            {
+                await _navigationService.NavigateAsync(nameof(AddFoodPage));
+            }
         }
 
         public bool IsRunning

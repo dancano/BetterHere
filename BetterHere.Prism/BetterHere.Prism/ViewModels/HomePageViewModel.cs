@@ -59,6 +59,7 @@ namespace BetterHere.Prism.ViewModels
             Response response = await _apiService.GetEstablishmentAsync(url, "api", "/establishment");
 
             IsRunning = false;
+
             List<EstablishmentResponse> establishments = (List<EstablishmentResponse>)response.Result;
             Establishments = new ObservableCollection<EstablishmentResponse>(establishments.Select(e => new EstablishmentItemViewModel(_navigationService)
             {
@@ -67,19 +68,17 @@ namespace BetterHere.Prism.ViewModels
                 LogoEstablishmentPath = e.LogoEstablishmentPath,
                 EstablishmentLocations = e.EstablishmentLocations
             }).ToList());
+            IsRunning = false;
         }
         private async void AddEstablishmentAsync()
         {
-            IsRunning = true;
             if (Settings.IsLogin == true)
             {
-                IsRunning = false;
-                await _navigationService.NavigateAsync($"/BetterHereMasterDetailPage/NavigationPage/AddEstablishmentPage");
+                await _navigationService.NavigateAsync(nameof(AddEstablishmentPage));
             }
             else
             {
-                IsRunning = false;
-                await _navigationService.NavigateAsync($"/BetterHereMasterDetailPage/NavigationPage/LoginPage");
+                await _navigationService.NavigateAsync(nameof(LoginPage));
             }
         }
     }

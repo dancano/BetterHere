@@ -18,7 +18,6 @@ namespace BetterHere.Prism.ViewModels
         private readonly IFilesHelper _filesHelper;
         private bool _isRunning;
         private bool _isEnabled;
-        private readonly EstablishmentRequest _establishment;
         private ImageSource _image;
         private MediaFile _file;
         private DelegateCommand _registerEstablishmentCommand;

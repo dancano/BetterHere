@@ -47,6 +47,8 @@ namespace BetterHere.Prism
             containerRegistry.RegisterForNavigation<LocationDetailPage, LocationDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<FoodPage, FoodPageViewModel>();
             containerRegistry.RegisterForNavigation<AddEstablishmentPage, AddEstablishmentPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddLocationPage, AddLocationPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddFoodPage, AddFoodPageViewModel>();
         }
     }
 }

@@ -2,46 +2,73 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BetterHere.Prism.Views.LocationDetailPage"
              Title="{Binding Title}">
-    
-    
-    <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding FoodLocations}"
+
+    <AbsoluteLayout>
+        <Grid>
+            <ScrollView Grid.Row="0">
+                <CollectionView ItemsSource="{Binding FoodLocations}"
                             SelectionMode="Single">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10">
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SelectFoodCommand}"/>
-                        </Grid.GestureRecognizers>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0"
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectFoodCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
                                    Text="{Binding FoodName}"
                                    VerticalOptions="Center"/>
-                        <Label Grid.Column="1"
+                                <Label Grid.Column="1"
                                    Text="{Binding Remarks}"
                                    VerticalOptions="Center"/>
-                        <Label Grid.Column="2"
+                                <Label Grid.Column="2"
                                    Text="{Binding Qualification}"
                                    VerticalOptions="Center"/>
-                        <Image Grid.Column="3" 
+                                <Image Grid.Column="3" 
                                Source="ic_more_vert.png" 
                                Aspect="AspectFit"
                                HeightRequest="60" 
                                WidthRequest="60" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </ContentPage.Content>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+            <Button Command="{Binding AddFoodCommand}" 
+                Text="+" BorderColor="#2b3c3c" 
+                BorderWidth="0.5" 
+                FontAttributes="Bold" 
+                BorderRadius="80"
+                FontSize="Title"
+                TextColor="White" 
+                HorizontalOptions="End" 
+                WidthRequest="60" 
+                HeightRequest="60" 
+                Margin="0,0,10,5" 
+                VerticalOptions="End"
+                Grid.Row="0"/>
+        </Grid>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                                AbsoluteLayout.LayoutFlags="All"
+                	                                BackgroundColor="{StaticResource ColorAccent}"
+                	                                HorizontalOptions="Center"
+                	                                TextColor="{StaticResource ColorFontInverse}"
+                	                                IsVisible="{Binding IsRunning}"
+                	                                Title="Loading..."
+                	                                VerticalOptions="Center"
+                	                                ViewBoxWidth="80"
+                	                                ViewBoxHeight="80" />
+    </AbsoluteLayout>
 </ContentPage>
