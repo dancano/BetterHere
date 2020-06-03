@@ -2,52 +2,62 @@
 
 @{
     ViewData["Title"] = "Details";
+    ViewData["BodyColorExplicit"] = "#F2AB27";
+    ViewData["BodyColorClass"] = "my-body-background";
 }
 
-<h2>Locations</h2>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<div class="container">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().Cities)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().SourceLatitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().SourceLongitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().Remarks)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.EstablishmentLocations)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cities.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SourceLatitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SourceLongitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remarks)
-            </td>
-            <td>
-                <a asp-action="FoodsDetails" asp-route-id="@item.Id" class="btn btn-info">Foods Detail</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="center-block">
+            <h2 class="text-center text-secondary">Locations</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().Cities)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().SourceLatitude)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().SourceLongitude)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EstablishmentLocations.FirstOrDefault().Remarks)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.EstablishmentLocations)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cities.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SourceLatitude)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SourceLongitude)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Remarks)
+                            </td>
+                            <td>
+                                <a asp-action="FoodsDetails" asp-route-id="@item.Id" class="btn btn-info">Foods Detail</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>
+                <a asp-action="Edit" class="btn my-btn-primary" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
+            </div>
+        </div>
+    </div>
 </div>

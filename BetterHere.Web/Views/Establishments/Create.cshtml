@@ -2,36 +2,59 @@
 
 @{
     ViewData["Title"] = "Create";
+    ViewData["BodyColorExplicit"] = "#F2AB27";
+    ViewData["BodyColorClass"] = "my-body-background";
 }
 
-<h2>Create</h2>
+@*<h2>Create</h2>
 
-<h4>EstablishmentEntity</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LogoEstablishmentPath" class="control-label"></label>
-                <input asp-for="LogoEstablishmentPath" class="form-control" />
-                <span asp-validation-for="LogoEstablishmentPath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-info" />
-            </div>
-        </form>
+    <h4>EstablishmentEntity</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">*@
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<div class="container">
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="center-block">
+            <h2 class="text-center text-secondary">Create Establishment</h2>
+
+            <form asp-action="Create" enctype="multipart/form-data">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LogoEstablishmentPath" class="control-label" text-secondary"></label>
+                    <input asp-for="LogoEstablishmentPath" class="form-control" text-secondary" type="file" />
+                    <span asp-validation-for="LogoEstablishmentPath" class="text-danger"></span>
+                </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn my-btn-primary" />
+                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                    </div>
+</form>
+        </div>
+        @*<div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.PictureFullPathEstablishment))
+            {
+                <img src="@Url.Content(Model.PictureFullPathEstablishment)" alt="Image" style="width:300px;height:300px;max-width: 100%; height: auto;" />
+            }
+        </div>*@
+    </div>
+
+    <div class="text-success">
+        <p>
+            @ViewBag.Message
+        </p>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
