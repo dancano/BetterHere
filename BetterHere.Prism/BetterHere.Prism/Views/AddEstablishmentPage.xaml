@@ -8,30 +8,24 @@
              x:Class="BetterHere.Prism.Views.AddEstablishmentPage"
              Title="{Binding Title}">
 
-    
-        <StackLayout>
-            <!--<Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+    <AbsoluteLayout>
+        <StackLayout Padding="15">
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" 
-                                   Grid.Column="0"
-                                   Text="Nombre"
-                                   VerticalOptions="Center"/>
-                <Entry Grid.Row="0" 
-                                   Grid.Column="1" 
-                                   BackgroundColor="Transparent"
-                                   HorizontalOptions="FillAndExpand"
-                                   Placeholder="Nombre del lugar" 
-                                   Text="{Binding Establishment.Name}"/>
-            </Grid>-->
+                <Label Text="Name" Grid.Column="0"/>
+                <Entry Placeholder="Name Establishment"
+                       Text="{Binding Establishment.Name}"
+                       Grid.Column="1"
+                       BackgroundColor="Transparent"/>
 
-            <Button Text="Cambiar Imagen" Command="{Binding ChangeImageCommand}"/>
+            </Grid>
+            <Button Text="Add Establishment" Command="{Binding RegisterEstablishmentCommand}" TextColor="White"/>
+            <Button Text="Add Picture Establishment" Command="{Binding ChangeImageCommand}" TextColor="White"/>
+            <Image Source="{Binding Image}"/>
         </StackLayout>
-
-
+        <ActivityIndicator IsVisible="{Binding IsEnabled}"/>
+    </AbsoluteLayout>
 </ContentPage>

@@ -59,17 +59,7 @@
                 Margin="0,0,10,5" 
                 VerticalOptions="End"/>
         </Grid>
-        <busyindicator:SfBusyIndicator AnimationType="Gear" 
-                                                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
-                	                                AbsoluteLayout.LayoutFlags="All"
-                	                                BackgroundColor="{StaticResource ColorAccent}"
-                	                                HorizontalOptions="Center"
-                	                                TextColor="{StaticResource ColorFontInverse}"
-                	                                IsVisible="{Binding IsRunning}"
-                	                                Title="Loading..."
-                	                                VerticalOptions="Center"
-                	                                ViewBoxWidth="80"
-                	                                ViewBoxHeight="80" />
-        
+        <ActivityIndicator IsVisible="{Binding IsRunning}"/>
+
     </AbsoluteLayout>
 </ContentPage>

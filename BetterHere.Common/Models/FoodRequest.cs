@@ -12,14 +12,7 @@ namespace BetterHere.Common.Models
         [MinLength(3, ErrorMessage = "The {0} field must have {1} characters.")]
         public string FoodName { get; set; }
 
-        [Display(Name = "Picture Food")]
         public string PicturePathFood { get; set; }
-
-        //TODO: Fix URL when publish in Azure
-        [Display(Name = "Picture Food")]
-        public string PictureFullPathFood => string.IsNullOrEmpty(PicturePathFood)
-        ? "https://JICtravelweb.azurewebsites.net//images/noimage.png"
-        : $"https://betterhere.blob.core.windows.net/foods/{PicturePathFood}";
 
         public float Qualification { get; set; }
 
@@ -28,6 +21,8 @@ namespace BetterHere.Common.Models
         public int EstablishmentLocationId { get; set; }
 
         public int TypeFoodsId { get; set; }
+
+        public byte[] PictureFoodArray { get; set; }
 
         public Guid UserId { get; set; }
     }

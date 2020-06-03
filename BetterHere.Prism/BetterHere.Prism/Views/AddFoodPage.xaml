@@ -6,80 +6,45 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="BetterHere.Prism.Views.AddFoodPage">
+             x:Class="BetterHere.Prism.Views.AddFoodPage"
+             Title="{Binding Title}">
 
     <AbsoluteLayout>
-        <Grid>
-            <StackLayout Grid.Row="0">
-                <Label Text="Picture Food"/>
-            </StackLayout>
-            <StackLayout Grid.Row="1">
-                <ffimageloading:CachedImage Aspect="AspectFit"
-                                                Grid.Row="0"
-                                                Source="{Binding Image}" 
-                                                CacheDuration= "50"
-                                                HeightRequest="150"
-                                                Margin="5"
-                                                RetryCount= "3"
-                                                RetryDelay= "600">
-                    <ffimageloading:CachedImage.Transformations>
-                        <fftransformations:CircleTransformation />
-                    </ffimageloading:CachedImage.Transformations>
-                    <ffimageloading:CachedImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
-                    </ffimageloading:CachedImage.GestureRecognizers>
-                </ffimageloading:CachedImage>
-            </StackLayout>
-            <StackLayout Grid.Row="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
-                    </Grid.ColumnDefinitions>
+        <StackLayout Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Name" Grid.Column="0" Grid.Row="0"/>
+                <Entry Placeholder="Food Name"
+                       Text="{Binding Food.FoodName}"
+                       Grid.Column="1" Grid.Row="0"
+                       BackgroundColor="Transparent"/>
+                <Label Text="Type Food" Grid.Column="0" Grid.Row="1"/>
+                <Picker ItemDisplayBinding="{Binding FoodTypeName}"
+                        ItemsSource="{Binding TypeFoods}"
+                        SelectedItem="{Binding TypeFood}"
+                        Title="Type Food"
+                        Grid.Column="1" Grid.Row="1"/>
+                <Label Text="Remarks" Grid.Column="0" Grid.Row="2"/>
+                <Entry Placeholder="Remarks"
+                       Text="{Binding Food.Remarks}"
+                       Grid.Column="1" Grid.Row="2"
+                       BackgroundColor="Transparent"/>
+                <Label Text="Qualification"
+                       Grid.Column="0" Grid.Row="3"/>
+                <Entry Text="{Binding Food.Qualification, StringFormat='{0:N2}'}"
+                       Grid.Column="1" Grid.Row="3"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"/>
 
-                    <Label Grid.Row="0"
-                                   Grid.Column="0"
-                                   Text="Name Food"
-                                   VerticalOptions="Center"/>
-                    <Entry Grid.Row="0"
-                                   Grid.Column="1"
-                                   Keyboard="Numeric"
-                                   Placeholder="Document"
-                                   Text="{Binding Food.FoodName}"/>
-
-                    <Label Grid.Row="1"
-                                   Grid.Column="0"
-                                   Text="Name Food"
-                                   VerticalOptions="Center"/>
-                    <Entry Grid.Row="1"
-                                   Grid.Column="1"
-                                   Keyboard="Numeric"
-                                   Placeholder="Document"
-                                   Text="{Binding Food.Remarks}"/>
-
-                    <Label Grid.Row="2"
-                                   Grid.Column="0"
-                                   Text="Resgister As"
-                                   VerticalOptions="Center"/>
-                    <Picker Grid.Row="2"
-                                    Grid.Column="1"
-                                    ItemDisplayBinding="{Binding FoodTypeName}"
-                                    ItemsSource="{Binding TypeFoods}"
-                                    SelectedItem="{Binding TypeFood}"
-                                    Title="Register As">
-                    </Picker>
-
-                    <Button Command="{Binding AddFoodCommand}"
-                        IsEnabled="{Binding IsEnabled}"
-                        Text="Add Food"
-                        BackgroundColor="#118C76" 
-                        TextColor="#011F26"
-                            Grid.Row="3"
-                            Grid.Column="1"/>
-                </Grid>
-
-            </StackLayout>
-        </Grid>
+            </Grid>
+            <Button Text="Add Food" Command="{Binding AddFoodCommand}" TextColor="White"/>
+            <Button Text="Add Picture Establishment" Command="{Binding ChangeImageCommand}" TextColor="White"/>
+            <Image Source="{Binding Image}"/>
+        </StackLayout>
+        <ActivityIndicator IsVisible="{Binding IsEnabled}"/>
     </AbsoluteLayout>
 
 </ContentPage>

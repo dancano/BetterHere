@@ -1,10 +1,12 @@
 ﻿using BetterHere.Common.Helpers;
 using BetterHere.Common.Models;
 using BetterHere.Common.Services;
+using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Navigation;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -83,26 +85,47 @@ namespace BetterHere.Prism.ViewModels
                 return;
             }
 
+            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+
+            EstablishmentRequest request = new EstablishmentRequest
+            {
+                Name = Establishment.Name,
+                UserId = new Guid(user.Id)
+            };
+
             byte[] imageArray = null;
             if (_file != null)
             {
                 imageArray = _filesHelper.ReadFully(_file.GetStream());
             }
 
-            Establishment.PictureEstablishmentArray = imageArray;
-            Response response = await _apiService.GetEstablishmentDetailAsync(url, "/api", "/Establishment", Establishment.Name);
-            IsRunning = false;
-            IsEnabled = true;
+            request.PictureEstablishmentArray = imageArray;
+            Response responseFind = await _apiService.GetEstablishmentDetailAsync(url, "/api", "/Establishment/", Establishment.Name);
 
-            if (!response.IsSuccess)
+            if (responseFind.IsSuccess)
             {
                 await App.Current.MainPage.DisplayAlert("Error", "This establishment already exist", "Accept");
                 return;
             }
 
-            IsRunning = false;
+            Response response = await _apiService.NewEstablishmentAsync(url, "/api", "/establishment", request, "bearer", token.Token);
 
-            await App.Current.MainPage.DisplayAlert("Ok", "We send a email for your confirmation", "Accept");
+            if (!response.IsSuccess)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert(
+                    "Error",
+                    response.Message,
+                    "Accept");
+                return;
+            }
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            await App.Current.MainPage.DisplayAlert("Congratulations!!!", "Registered Establishment!", "Accept");
             await _navigationService.GoBackAsync();
         }
 

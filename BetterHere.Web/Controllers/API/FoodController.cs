@@ -101,10 +101,16 @@ namespace BetterHere.Web.Controllers.API
                 }
             }
 
+            string picturePath = string.Empty;
+            if (request.PictureFoodArray != null && request.PictureFoodArray.Length > 0)
+            {
+                picturePath = await _blobHelper.UploadBlobAsync(request.PictureFoodArray, "foods");
+            }
+
             FoodEntity food = new FoodEntity
             {
                 FoodName = request.FoodName,
-                PicturePathFood = request.PicturePathFood,
+                PicturePathFood = picturePath,
                 Qualification = request.Qualification,
                 Remarks = request.Remarks,
                 TypeFoods = typeFoodEntity,

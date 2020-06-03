@@ -31,17 +31,14 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0"
+                                    <Label Grid.Column="0"
                                        Text="{Binding Name}"
                                        VerticalOptions="Center"/>
-                                <Label Grid.Column="1"
-                                       Text="{Binding LogoEstablishmentPath}"
-                                       VerticalOptions="Center"/>
-                                <Image Grid.Column="3" 
-                                   Source="ic_more_vert.png" 
+                                    <Image Grid.Column="1" 
                                    Aspect="AspectFit"
                                    HeightRequest="60" 
-                                   WidthRequest="60" />
+                                   WidthRequest="60" 
+                                   Source="{Binding LogoEstablishmentPath}"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -64,17 +61,7 @@
                     Command="{Binding AddEstablishmentCommand}"/>
 
         </Grid>
-        <busyindicator:SfBusyIndicator AnimationType="Gear" 
-                                                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
-                	                                AbsoluteLayout.LayoutFlags="All"
-                	                                BackgroundColor="{StaticResource ColorAccent}"
-                	                                HorizontalOptions="Center"
-                	                                TextColor="{StaticResource ColorFontInverse}"
-                	                                IsVisible="{Binding IsRunning}"
-                	                                Title="Loading..."
-                	                                VerticalOptions="Center"
-                	                                ViewBoxWidth="80"
-                	                                ViewBoxHeight="80" />
-    </AbsoluteLayout>
+            <ActivityIndicator IsVisible="{Binding IsRunning}"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
