@@ -14,17 +14,17 @@
 
     <h3>Are you sure you want to delete this?</h3>
     <div>
-        <h4>TypeFoodEntity</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FoodTypeName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.FoodTypeName)
-            </dd>
-        </dl>
+        <div class="center-block">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodTypeName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.FoodTypeName)
+                </dd>
 
+            </dl>
+        </div>
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
             <input type="submit" value="Delete" class="btn my-btn-primary" />
@@ -32,3 +32,4 @@
         </form>
     </div>
 </div>
+

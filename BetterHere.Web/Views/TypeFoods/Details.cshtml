@@ -2,23 +2,103 @@
 
 @{
     ViewData["Title"] = "Details";
+    ViewData["BodyColorExplicit"] = "#F2AB27";
+    ViewData["BodyColorClass"] = "my-body-background";
 }
 
-<h2>Details</h2>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
-<div>
-    <h4>TypeFoodEntity</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FoodTypeName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FoodTypeName)
-        </dd>
-    </dl>
+<div class="container">
+    <h2>Details</h2>
+
+    <div class="table-responsive text-secondary">
+
+        <table class="table table-bordered text-secondary my-table" id="MyTable" width="100%" cellspacing="0">
+            @*<table class="my-table text-secondary" id="MyTable" width="100%" cellspacing="0">*@
+            <thead>
+                <tr>
+                    <th style="cursor: pointer;" class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().FoodName)
+                    </th>
+                    <th style="cursor: pointer;" class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().PicturePathFood)
+                    </th>
+                    <th style="cursor: pointer;" class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().Qualification)
+                    </th>
+                    <th style="cursor: pointer;" class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().Remarks)
+                    </th>
+                    <th style="cursor: pointer;" class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().TypeFoods.FoodTypeName)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().FoodName)
+                    </th>
+                    <th class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().PicturePathFood)
+                    </th>
+                    <th class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().Qualification)
+                    </th>
+                    <th class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().Remarks)
+                    </th>
+                    <th class="text-secondary">
+                        @Html.DisplayNameFor(model => model.Foods.FirstOrDefault().TypeFoods.FoodTypeName)
+                    </th>
+                    <th></th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model.Foods)
+                {
+                    <tr class="tr-item">
+                        <td class="text-secondary">
+                            @Html.DisplayFor(modelItem => item.FoodName)
+                        </td>
+                        <td class="text-secondary">
+                            <img src="@Url.Content(item.PictureFullPathFood)" class="img-rounded" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                        </td>
+                        <td class="text-secondary">
+                            @Html.DisplayFor(modelItem => item.Qualification)
+                        </td>
+                        <td class="text-secondary">
+                            @Html.DisplayFor(modelItem => item.Remarks)
+                        </td>
+                        <td class="text-secondary">
+                            @Html.DisplayFor(modelItem => item.TypeFoods.FoodTypeName)
+                        </td>
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn my-btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon-align-justify"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn my-btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn my-btn-warning">Edit</a>
+        <a asp-action="Index" class="btn my-btn-primary">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#MyTable').DataTable();
+    });
+
+</script>
