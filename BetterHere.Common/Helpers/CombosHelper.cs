@@ -15,7 +15,7 @@ namespace BetterHere.Common.Helpers
             };
         }
 
-        public static List<CityResponse> GetPlaceCities()
+        public static List<CityResponse> GetCities()
         {
             return new List<CityResponse>
             {
@@ -39,6 +39,17 @@ namespace BetterHere.Common.Helpers
                 new TypeFoodResponse { Id = 3, FoodTypeName = "Germany" },
                 new TypeFoodResponse { Id = 4, FoodTypeName = "Chinnese" },
                 new TypeFoodResponse { Id = 5, FoodTypeName = "Caribbean" },
+            };
+        }
+
+        public static List<TypeEstablishmentResponse> GetTypeEstablishment()
+        {
+            return new List<TypeEstablishmentResponse>
+            {
+                new TypeEstablishmentResponse { Id = 1, NameType = "Gourmet Food" },
+                new TypeEstablishmentResponse { Id = 2, NameType = "Fast Food" },
+                new TypeEstablishmentResponse { Id = 3, NameType = "Vegan Food" },
+
             };
         }
     }

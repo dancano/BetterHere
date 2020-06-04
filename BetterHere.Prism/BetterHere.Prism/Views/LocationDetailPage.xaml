@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BetterHere.Prism.Views.LocationDetailPage"
              Title="{Binding Title}">
@@ -29,17 +30,18 @@
                                 <Label Grid.Column="0"
                                    Text="{Binding FoodName}"
                                    VerticalOptions="Center"/>
-                                <Label Grid.Column="1"
-                                   Text="{Binding Remarks}"
-                                   VerticalOptions="Center"/>
-                                <Label Grid.Column="2"
-                                   Text="{Binding Qualification}"
-                                   VerticalOptions="Center"/>
-                                <Image Grid.Column="3" 
-                               Source="ic_more_vert.png" 
-                               Aspect="AspectFit"
-                               HeightRequest="60" 
-                               WidthRequest="60" />
+                                <StackLayout Grid.Column="1">
+                                    <rating:SfRating HorizontalOptions="Center"
+                                                 ItemSize="15"
+                                     Margin="0,5"
+                                     Precision="Exact"
+                                     Value="{Binding Qualification}" />
+                                </StackLayout>
+                                <Image Grid.Column="2" 
+                                       Source="{Binding PictureFullPathFood}" 
+                                       Aspect="AspectFit"
+                                       HeightRequest="60" 
+                                       WidthRequest="60" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

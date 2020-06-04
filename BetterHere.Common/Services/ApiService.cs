@@ -366,11 +366,11 @@ namespace BetterHere.Common.Services
                     };
                 }
 
-                EstablishmentLocationResponse trip = JsonConvert.DeserializeObject<EstablishmentLocationResponse>(answer);
+                EstablishmentLocationResponse result = JsonConvert.DeserializeObject<EstablishmentLocationResponse>(answer);
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = trip,
+                    Result = result,
                 };
             }
             catch (Exception ex)
@@ -407,11 +407,11 @@ namespace BetterHere.Common.Services
                     };
                 }
 
-                EstablishmentLocationResponse trip = JsonConvert.DeserializeObject<EstablishmentLocationResponse>(answer);
+                EstablishmentLocationResponse location = JsonConvert.DeserializeObject<EstablishmentLocationResponse>(answer);
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = trip,
+                    Result = location,
                 };
             }
             catch (Exception ex)

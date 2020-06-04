@@ -2,10 +2,64 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"    
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BetterHere.Prism.Views.AddLocationPage"
              Title="{Binding Title}">
-    
-    
-    
+
+    <StackLayout>
+        <StackLayout Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="City" Grid.Column="0" Grid.Row="0"/>
+                <Picker ItemDisplayBinding="{Binding Name}"
+                        ItemsSource="{Binding Cities}"
+                        SelectedItem="{Binding City}"
+                        Title="City"
+                        Grid.Column="1" Grid.Row="0"/>
+                <Label Text="Type Food" Grid.Column="0" Grid.Row="1"/>
+                <Picker ItemDisplayBinding="{Binding NameType}"
+                        ItemsSource="{Binding TypeEstablishments}"
+                        SelectedItem="{Binding TypeEstablishment}"
+                        Title="Type Establishment"
+                        Grid.Column="1" Grid.Row="1"/>
+                <Label Grid.Row="2" 
+                       Grid.Column="0"
+                       HorizontalOptions="FillAndExpand" 
+                       Text="Source"
+                       VerticalOptions="Center"/>
+                <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                    <Entry HorizontalOptions="FillAndExpand" 
+                           Placeholder="AddressPlaceHolder"
+                           Text="{Binding Source}"
+                           BackgroundColor="Transparent"/>
+                    <ImageButton Command="{Binding GetAddressCommand}"
+                                 Source="ic_bug_report.png"
+                                 IsEnabled="True"/>
+                </StackLayout>
+                <Label Text="Remark" Grid.Column="0" Grid.Row="3"/>
+                <Entry Text="{Binding Location.Remarks}" Grid.Column="1" Grid.Row="3" BackgroundColor="Transparent"/>
+            </Grid>
+        </StackLayout>
+        <maps:Map x:Name="MyMap"
+                  MapType="Street"/>
+        <StackLayout Padding="5">
+            <Button CornerRadius="20"
+                    HeightRequest="40"
+                    Margin="10,0"
+                    Text="Add Location"
+                    TextColor="White"
+                    Command="{Binding AddLocationCommand}"/>
+        </StackLayout>
+    </StackLayout>
+
+
 </ContentPage>

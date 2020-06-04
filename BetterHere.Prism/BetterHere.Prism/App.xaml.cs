@@ -34,6 +34,7 @@ namespace BetterHere.Prism
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.Register<IRegexHelper, RegexHelper>();
             containerRegistry.Register<IFilesHelper, FilesHelper>();
+            containerRegistry.Register<IGeolocatorService, GeolocatorService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
             containerRegistry.RegisterForNavigation<BetterHereMasterDetailPage, BetterHereMasterDetailPageViewModel>();
@@ -47,8 +48,8 @@ namespace BetterHere.Prism
             containerRegistry.RegisterForNavigation<LocationDetailPage, LocationDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<FoodPage, FoodPageViewModel>();
             containerRegistry.RegisterForNavigation<AddEstablishmentPage, AddEstablishmentPageViewModel>();
-            containerRegistry.RegisterForNavigation<AddLocationPage, AddLocationPageViewModel>();
             containerRegistry.RegisterForNavigation<AddFoodPage, AddFoodPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddLocationPage, AddLocationPageViewModel>();
         }
     }
 }

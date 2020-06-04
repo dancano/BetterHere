@@ -68,7 +68,6 @@ namespace BetterHere.Prism.ViewModels
                 LogoEstablishmentPath = e.LogoEstablishmentPath,
                 EstablishmentLocations = e.EstablishmentLocations
             }).ToList());
-            IsRunning = false;
         }
         private async void AddEstablishmentAsync()
         {

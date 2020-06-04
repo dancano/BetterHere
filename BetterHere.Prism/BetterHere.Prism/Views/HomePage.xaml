@@ -38,7 +38,8 @@
                                    Aspect="AspectFit"
                                    HeightRequest="60" 
                                    WidthRequest="60" 
-                                   Source="{Binding LogoEstablishmentPath}"/>
+                                   Source="{Binding PictureFullPathEstablishment}"/>
+                                
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -61,7 +62,17 @@
                     Command="{Binding AddEstablishmentCommand}"/>
 
         </Grid>
-            <ActivityIndicator IsVisible="{Binding IsRunning}"/>
+            <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="Silver"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="White"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="Loading..."
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
