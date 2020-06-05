@@ -1,4 +1,5 @@
 ﻿
+
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -8,17 +9,19 @@ using Plugin.FacebookClient;
 using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
+using Syncfusion.ListView.XForms;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
+using Syncfusion.SfDataGrid.XForms;
 using Syncfusion.SfRating.XForms.Droid;
 using Xamarin.Forms;
 
 namespace BetterHere.Prism.Droid
 {
     [Activity(
-        Label = "Better Here", 
-        Icon = "@mipmap/ic_launcher", 
-        Theme = "@style/MainTheme", 
-        MainLauncher = false, 
+        Label = "Better Here",
+        Icon = "@mipmap/ic_launcher",
+        Theme = "@style/MainTheme",
+        MainLauncher = false,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -35,7 +38,10 @@ namespace BetterHere.Prism.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             new SfBusyIndicatorRenderer();
             new SfRatingRenderer();
+            new SfDataGrid();
+            new SfListView();
             Xamarin.FormsMaps.Init(this, bundle);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             LoadApplication(new App(new AndroidInitializer()));
         }
 

@@ -2,7 +2,103 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="BetterHere.Prism.Views.ModifyUserPage">
-  
+             x:Class="BetterHere.Prism.Views.ModifyUserPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
+             Title="{Binding Title}">
+    <AbsoluteLayout>
+        <Grid>
+            <Image Source="TravelFly.jpg" Aspect="AspectFill"/>
+            <BoxView Color="LemonChiffon" Opacity="0.8"/>
+            <StackLayout>
+                <StackLayout>
+                    <ffimageloading:CachedImage Aspect="AspectFit"
+                                                    Source="{Binding Image}" 
+                                                    CacheDuration= "50"
+                                                    HeightRequest="150"
+                                                    Margin="5"
+                                                    RetryCount= "3"
+                                                    RetryDelay= "600">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+
+                    </ffimageloading:CachedImage>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="Document"
+                                   VerticalOptions="Center"/>
+                        <Entry Grid.Row="0"
+                                   Grid.Column="1"
+                                   Keyboard="Numeric"
+                                   Placeholder="Document"
+                                   Text="{Binding User.Document}"/>
+
+                        <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Text="First Name"
+                                   VerticalOptions="Center"/>
+                        <Entry Grid.Row="1"
+                                   Grid.Column="1"
+                                   Placeholder="First Name"
+                                   Text="{Binding User.FirstName}"/>
+
+                        <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   Text="Last Name"
+                                   VerticalOptions="Center"/>
+                        <Entry Grid.Row="2"
+                                   Grid.Column="1"
+                                   Placeholder="Last Name"
+                                   Text="{Binding User.LastName}"/>
+                    </Grid>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                         VerticalOptions="EndAndExpand">
+                    <Button Command="{Binding SaveCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="Save"
+                        BackgroundColor="#118C76" 
+                        TextColor="#011F26"/>
+                    <Button Command="{Binding ChangePasswordCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="Changed Password"
+                        BackgroundColor="#118C76" 
+                        TextColor="#011F26"/>
+                </StackLayout>
+
+            </StackLayout>
+        </Grid>
+        <busyindicator:SfBusyIndicator AnimationType="Globe" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorPrimary}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="Loading ..."
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
 </ContentPage>
