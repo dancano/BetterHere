@@ -37,6 +37,10 @@ namespace BetterHere.Prism.ViewModels
             {
                 await _navigationService.NavigateAsync(nameof(AddLocationPage));
             }
+            else
+            {
+                await _navigationService.NavigateAsync(nameof(LoginPage));
+            }
         }
 
         public bool IsRunning
