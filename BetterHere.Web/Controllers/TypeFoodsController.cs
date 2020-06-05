@@ -122,6 +122,7 @@ namespace BetterHere.Web.Controllers
             }
 
             TypeFoodEntity typeFoodEntity = await _context.TypeFoods
+                .Include(t => t.Foods)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (typeFoodEntity == null)
             {
@@ -136,7 +137,11 @@ namespace BetterHere.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            TypeFoodEntity typeFoodEntity = await _context.TypeFoods.FindAsync(id);
+            TypeFoodEntity typeFoodEntity = await _context.TypeFoods
+                .Include(t => t.Foods)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+
             _context.TypeFoods.Remove(typeFoodEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

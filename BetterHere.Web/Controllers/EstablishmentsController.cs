@@ -1,11 +1,12 @@
 ﻿using BetterHere.Web.Data;
 using BetterHere.Web.Data.Entities;
 using BetterHere.Web.Helpers;
+using BetterHere.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.ResultOperators.Internal;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;   
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -117,7 +118,7 @@ namespace BetterHere.Web.Controllers
                         ModelState.AddModelError(string.Empty, ex.InnerException.Message);
                     }
                 }
-                
+
             }
             return View(establishmentEntity);
         }
@@ -179,6 +180,7 @@ namespace BetterHere.Web.Controllers
             }
 
             EstablishmentEntity establishmentEntity = await _context.Establishments
+                .Include(t => t.EstablishmentLocations)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (establishmentEntity == null)
             {

@@ -122,6 +122,7 @@ namespace BetterHere.Web.Controllers
             }
 
             TypeEstablishmentEntity typeEstablishmentEntity = await _context.TypeEstablishments
+                .Include(t => t.EstablishmentLocations)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (typeEstablishmentEntity == null)
             {
@@ -136,7 +137,7 @@ namespace BetterHere.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            TypeEstablishmentEntity typeEstablishmentEntity = await _context.TypeEstablishments.FindAsync(id);
+            TypeEstablishmentEntity typeEstablishmentEntity = await _context.TypeEstablishments.Include(t => t.EstablishmentLocations).FirstOrDefaultAsync(m => m.Id == id);
             _context.TypeEstablishments.Remove(typeEstablishmentEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
