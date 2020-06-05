@@ -1,4 +1,5 @@
 ﻿using BetterHere.Common.Enum;
+using BetterHere.Common.Models;
 using BetterHere.Web.Data.Entities;
 using BetterHere.Web.Models;
 using Microsoft.AspNetCore.Identity;
@@ -21,6 +22,35 @@ namespace BetterHere.Web.Helpers
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+        }
+        public async Task<UserEntity> AddUserAsync(FacebookProfile model)
+        {
+            UserEntity userEntity = new UserEntity
+            {
+
+
+                Address = "...",
+                Document = "...",
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PicturePathUser = model.Picture?.Data?.Url,
+                PhoneNumber = "...",
+                UserName = model.Email,
+                UserType = UserType.User,
+                LoginType = LoginType.Facebook
+            };
+
+
+            IdentityResult result = await _userManager.CreateAsync(userEntity, model.Id);
+            if (result != IdentityResult.Success)
+            {
+                return null;
+            }
+
+            UserEntity newUser = await GetUserAsync(model.Email);
+            await AddUserToRoleAsync(newUser, userEntity.UserType.ToString());
+            return newUser;
         }
 
         public async Task<SignInResult> LoginAsync(LoginViewModel model)
@@ -86,9 +116,9 @@ namespace BetterHere.Web.Helpers
                 PicturePathUser = path,
                 PhoneNumber = model.PhoneNumber,
                 UserName = model.Username,
-                UserType = model.UserTypeId == 1 ? UserType.Owner : UserType.User
+                UserType = model.UserTypeId == 1 ? UserType.Owner : UserType.User,
+                
             };
-
             IdentityResult result = await _userManager.CreateAsync(userEntity, model.Password);
             if (result != IdentityResult.Success)
             {

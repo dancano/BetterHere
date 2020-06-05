@@ -1,8 +1,12 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Java.Security;
+using Plugin.FacebookClient;
 using Prism;
 using Prism.Ioc;
+using System;
 
 namespace BetterHere.Prism.Droid
 {
@@ -20,10 +24,20 @@ namespace BetterHere.Prism.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            FacebookClientManager.Initialize(this);
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App(new AndroidInitializer()));
+
+          LoadApplication(new App(new AndroidInitializer()));
         }
+
+
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            FacebookClientManager.OnActivityResult(requestCode, resultCode, data);
+        }
+
     }
 
     public class AndroidInitializer : IPlatformInitializer

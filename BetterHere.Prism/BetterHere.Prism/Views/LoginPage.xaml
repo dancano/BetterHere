@@ -63,7 +63,16 @@
                                     <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
                                 </Label.GestureRecognizers>
                             </Label>
+                            
                         </StackLayout>
+                        <Button BackgroundColor="#4768AD" 
+                        Command="{Binding LoginFacebookCommand}"
+                        HeightRequest="45"
+                        IsEnabled="{Binding IsEnabled}"
+                        ImageSource="ic_fb"
+                        Text="Login whit Facebook"
+                        TextColor="#FFFFFF"/>
+                        
                         <StackLayout Grid.Row="2" HorizontalOptions="Center" Margin="0,0,0,50">
                             <Label Text="LogIn With" HorizontalOptions="Center"/>
                             <StackLayout Orientation="Horizontal">

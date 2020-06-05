@@ -8,10 +8,11 @@ using System.Linq;
 namespace BetterHere.Prism.ViewModels
 {
     public class ModifyUserPageViewModel : ViewModelBase
-    { 
+    {
         public ModifyUserPageViewModel(INavigationService navigationService) : base(navigationService)
         {
 
         }
     }
 }
+

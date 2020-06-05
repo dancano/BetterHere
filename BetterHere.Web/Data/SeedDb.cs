@@ -36,8 +36,14 @@ namespace BetterHere.Web.Data
             await CheckUserAsync("1010", "Daniel", "Cano", "ddcp10@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
             UserEntity owner = await CheckUserAsync("2020", "Dario", "Cano", "danieldario_01@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Owner);
             UserEntity user1 = await CheckUserAsync("3030", "Daniel", "Peña", "probandos59@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
-            UserEntity user2 = await CheckUserAsync("4040", "Danidaniel", "Cape", "danielcano198367@correo.itm.edu.co", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
-            await CheckEstablishmentAsync(owner, user1, user2);
+            UserEntity user2 = await CheckUserAsync("4040", "Danidaniel", "Cape", "danielcano198367@correo.itm.edu.co", "350 634 2747", "Colores de Calasanz", UserType.User);
+            UserEntity user3 = await CheckUserAsync("5050", "Kimberly", "Garcia", "kimberlygarcia123285@correo.itm.edu.co", "350 256 8958", "Calasanz Azul", UserType.User);
+            UserEntity user4 = await CheckUserAsync("6060", "Andrea", "Quiroga", "jennyquiroga147572@correo.itm.edu.co", "350 123 5458", "Punta Luna", UserType.User);
+            UserEntity user5 = await CheckUserAsync("7070", "Daniel", "Sánchez", "daniel@yopmail.com", "350 478 8954", "Unidad Reidencial Montecristo", UserType.User);
+            UserEntity user6 = await CheckUserAsync("8080", "Eduardo", "Castellar", "Eduardo@yopmail.com", "320 158 2747", "Edificio Colores", UserType.User);
+            UserEntity user7 = await CheckUserAsync("9090", "Juan", "Zuluaga", "zulu@yopmail.com", "350 634 7854", "Calasanz Azul", UserType.User);
+            UserEntity user8 = await CheckUserAsync("1011", "Carlos", "Zuluaga", "juanca@yopmail.com", "350 857 9857", "Colores de Calasanz", UserType.User);
+            await CheckEstablishmentAsync(owner, user1, user2, user3, user4, user5, user6, user7, user8);
         }
 
         private async Task CheckCitiesAsync()
@@ -47,13 +53,9 @@ namespace BetterHere.Web.Data
                 _dataContext.Cities.Add(new CityEntity { Name = "Medellín" });
                 _dataContext.Cities.Add(new CityEntity { Name = "Cali" });
                 _dataContext.Cities.Add(new CityEntity { Name = "Bogotá D.C." });
-                _dataContext.Cities.Add(new CityEntity { Name = "Santa Marta" });
                 _dataContext.Cities.Add(new CityEntity { Name = "Cartagena" });
-                _dataContext.Cities.Add(new CityEntity { Name = "Manizales" });
                 _dataContext.Cities.Add(new CityEntity { Name = "Pereira" });
-                _dataContext.Cities.Add(new CityEntity { Name = "Bello" });
-                _dataContext.Cities.Add(new CityEntity { Name = "Valledupar" });
-
+                
                 await _dataContext.SaveChangesAsync();
             }
         }
@@ -63,7 +65,7 @@ namespace BetterHere.Web.Data
             if (!_dataContext.TypeFoods.Any())
             {
                 _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodTypeName = "Italian" });
-                _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodTypeName = "Hot" });
+                _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodTypeName = "Mexicana" });
                 _dataContext.TypeFoods.Add(new TypeFoodEntity { FoodTypeName = "Arabic" });
 
                 await _dataContext.SaveChangesAsync();
@@ -126,7 +128,13 @@ namespace BetterHere.Web.Data
         private async Task CheckEstablishmentAsync(
             UserEntity owner,
             UserEntity user1,
-            UserEntity user2)
+            UserEntity user2,
+            UserEntity user3,
+            UserEntity user4,
+            UserEntity user5,
+            UserEntity user6,
+            UserEntity user7,
+            UserEntity user8)
         {
             if (!_dataContext.Establishments.Any())
             {
