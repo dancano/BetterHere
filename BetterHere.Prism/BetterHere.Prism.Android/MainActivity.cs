@@ -1,21 +1,16 @@
-﻿using Android.App;
+﻿
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-
 using Plugin.CurrentActivity;
+using Plugin.FacebookClient;
 using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
 using Syncfusion.SfRating.XForms.Droid;
-
-using Java.Security;
-using Plugin.FacebookClient;
-using Prism;
-using Prism.Ioc;
-using System;
-
+using Xamarin.Forms;
 
 namespace BetterHere.Prism.Droid
 {
@@ -49,10 +44,6 @@ namespace BetterHere.Prism.Droid
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
-            
-            
-
 
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

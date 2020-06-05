@@ -62,7 +62,7 @@
                     Command="{Binding AddEstablishmentCommand}"/>
 
         </Grid>
-            <busyindicator:SfBusyIndicator AnimationType="Gear" 
+            <!--<busyindicator:SfBusyIndicator AnimationType="Gear" 
                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                 	                   AbsoluteLayout.LayoutFlags="All"
                 	                   BackgroundColor="Silver"
@@ -72,7 +72,8 @@
                 	                   Title="Loading..."
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
-                	                   ViewBoxHeight="80" />
+                	                   ViewBoxHeight="80" /> 
+        -->
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
