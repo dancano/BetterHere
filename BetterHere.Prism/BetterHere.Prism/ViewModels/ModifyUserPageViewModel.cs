@@ -35,7 +35,7 @@ namespace BetterHere.Prism.ViewModels
             Title = "Modify User";
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
-            Image = User.PictureFullPathUser;
+            Image = User.PictureFullPath;
         }
 
         public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BetterHere.Web.Data.Entities
@@ -19,6 +20,7 @@ namespace BetterHere.Web.Data.Entities
         : $"https://betterhere.blob.core.windows.net/establishments/{LogoEstablishmentPath}";
 
         public UserEntity User { get; set; }
+
 
         public List<EstablishmentLocationEntity> EstablishmentLocations { get; set; }
 

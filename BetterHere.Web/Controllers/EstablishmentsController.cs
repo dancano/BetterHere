@@ -89,39 +89,78 @@ namespace BetterHere.Web.Controllers
         }
 
         // GET: EstablishmentEntities/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+          public IActionResult Create()
+          {
+              return View();
+          }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(EstablishmentEntity establishmentEntity)
-        {
-            if (ModelState.IsValid)
+          [HttpPost]
+          [ValidateAntiForgeryToken]
+          public async Task<IActionResult> Create(EstablishmentEntity establishmentEntity)
+          {
+              if (ModelState.IsValid)
+              {
+                  establishmentEntity.Name = establishmentEntity.Name.ToUpper();
+                  _context.Add(establishmentEntity);
+                  try
+                  {
+                      await _context.SaveChangesAsync();
+                      return RedirectToAction(nameof(Index));
+                  }
+                  catch (Exception ex)
+                  {
+                      if (ex.InnerException.Message.Contains("Duplicate"))
+                      {
+                          ModelState.AddModelError(string.Empty, "Already exits a Establishment");
+                      }
+                      else
+                      {
+                          ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                      }
+                  }
+
+              }
+              return View(establishmentEntity);
+          }
+
+
+        /*  // GET: EstablishmentEntities/Create
+           public IActionResult Create()
             {
-                establishmentEntity.Name = establishmentEntity.Name.ToUpper();
-                _context.Add(establishmentEntity);
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException.Message.Contains("Duplicate"))
-                    {
-                        ModelState.AddModelError(string.Empty, "Already exits a Establishment");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
-                    }
-                }
-
+                return View();
             }
-            return View(establishmentEntity);
-        }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Create(EstablishmentEntity model)
+            {
+                if (ModelState.IsValid)
+                {
+                  if (ModelState.IsValid)
+                  {
+                      string path = model.LogoEstablishmentPath;
+
+                      if (model.PictureFile != null)
+                      {
+                          path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                      }
+
+                      Entity user = await _userHelper.GetUserByEmailAsync(User.Identity.Name);
+
+                      user.FirstName = model.FirstName;
+                      user.LastName = model.LastName;
+                      user.PhoneNumber = model.PhoneNumber;
+                      user.PicturePath = path;
+
+                      await _userHelper.UpdateUserAsync(user);
+                      return RedirectToAction("Index", "Home");
+                  }
+
+                  return View(model);
+              } 
+
+
+          }*/
 
         // GET: EstablishmentEntities/Edit/5
         public async Task<IActionResult> Edit(int? id)
