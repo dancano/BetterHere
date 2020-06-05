@@ -1,4 +1,5 @@
-﻿using BetterHere.Web.Data.Entities;
+﻿using BetterHere.Common.Models;
+using BetterHere.Web.Data.Entities;
 using BetterHere.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -11,6 +12,8 @@ namespace BetterHere.Web.Helpers
         Task<UserEntity> GetUserAsync(string email);
 
         Task<UserEntity> GetUserAsync(Guid userId);
+
+        Task<UserEntity> AddUserAsync(FacebookProfile model);
 
         Task<IdentityResult> AddUserAsync(UserEntity user, string password);
 

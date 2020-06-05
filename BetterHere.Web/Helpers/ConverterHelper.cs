@@ -18,7 +18,8 @@ namespace BetterHere.Web.Helpers
                 LastName = userEntity.LastName,
                 Email = userEntity.Email,
                 Address = userEntity.Address,
-                PicturePathUser = userEntity.PicturePathUser
+                PicturePathUser = userEntity.PicturePathUser,
+                LoginType = userEntity.LoginType
             };
         }
 

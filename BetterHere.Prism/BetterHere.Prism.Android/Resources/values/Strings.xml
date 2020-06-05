@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
-	<string name="app_name">BetterHere.Prism.Droid</string>
+  <string name="hello">Hello World, Click Me!</string>
+  <string name="app_name">com.companyname.appname</string>
+  <string name="facebook_app_name">BetterHere</string>
+  <string name="facebook_app_id">1531198890383577</string>
+  <string name="fb_login_protocol_scheme">fb1531198890383577</string>
 </resources>
